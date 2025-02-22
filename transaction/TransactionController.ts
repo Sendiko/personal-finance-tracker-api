@@ -77,24 +77,21 @@ const TransactionController = {
         wallet.balance -= transaction.amount;
         await wallet.save();
       } else {
-        // @ts-ignore: transaction has type
-        if (transaction.type === "income") {
-          const wallet = await Wallet.findOne({
-            // @ts-ignore: transaction has walletId
-            where: { id: transaction.walletId },
+        const wallet = await Wallet.findOne({
+          // @ts-ignore: transaction has walletId
+          where: { id: transaction.walletId },
+        });
+
+        if (!wallet) {
+          return res.status(404).json({
+            status: 404,
+            message: "Wallet not found.",
           });
-
-          if (!wallet) {
-            return res.status(404).json({
-              status: 404,
-              message: "Wallet not found.",
-            });
-          }
-
-          // @ts-ignore: transaction has amount and wallet has balance
-          wallet.balance += transaction.amount;
-          await wallet.save();
         }
+
+        // @ts-ignore: transaction has amount and wallet has balance
+        wallet.balance += transaction.amount;
+        await wallet.save();
       }
 
       return res.status(201).json({
