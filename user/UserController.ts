@@ -53,7 +53,11 @@ const UserController = {
   },
   store: async (req: Request, res: Response) => {
     try {
-      const user = await User.create(req.body);
+      const user = await User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: await bcrypt.hash(req.body.password, 10),
+      });
 
       return res.status(201).json({
         status: 201,
@@ -80,6 +84,12 @@ const UserController = {
       }
 
       await user.update(req.body);
+
+      return res.status(200).json({
+        status: 200,
+        message: "User updated successfully.",
+        user: user
+      })
     } catch (error: any) {
       return res.status(500).json({
         status: 500,
@@ -112,7 +122,7 @@ const UserController = {
     try {
       const user = await User.findOne({
         where: {
-          name: req.body.username,
+          name: req.body.name,
         },
       });
 
