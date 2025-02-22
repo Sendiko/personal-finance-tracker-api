@@ -1,37 +1,28 @@
 # Personal Finance Tracker
 
-## How to Clone and Run the App
+Backend API untuk aplikasi Personal Finance Tracker sebagai materi untuk pembelajaran Android Programming
 
-### Prerequisites
-- Git
-- Node.js
-- npm (Node Package Manager)
+## Fitur
 
-### Clone the Repository
-```bash
-git clone https://github.com/yourusername/personal-finance-tracker.git
-cd personal-finance-tracker
-```
+- User 
+    - Authentication with JWT.
+    - Create, Read, Update, Delete User.
+    - User statistics.
 
-### Install Dependencies
-```bash
-npm install
-```
+- Wallet
+    - Create, Read, Update, Delete Wallets.
 
-### Run the Application
-```bash
-npm start
-```
+- Category
+    - Create, Read, Update, Delete User.
 
-### Open in Browser
-Open your browser and navigate to `http://localhost:3000`
+- Transactions
+    - Create, Read, Update, Delete Transactions.
+    - Automated Calculation.
 
-### Additional Scripts
-- **Build the app**: `npm run build`
-- **Run tests**: `npm test`
+## Documentation
 
-### Contributing
-Feel free to submit issues and pull requests.
+Dokumentasi dapat dilihat di [Dokumentasi Postman.](https://documenter.getpostman.com/view/21050563/2sAYdcrCJs)
 
-### License
-This project is licensed under the MIT License.
+## Contributing
+
+Saran dan kritik sangat saya terima, anda dapat berpartisipasi melewati issues dan pull requests.
