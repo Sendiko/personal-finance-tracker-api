@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Transaction from "./Transaction";
 import Wallet from "../wallet/Wallet";
+import Category from "../category/Category";
 
 const TransactionController = {
   index: async (req: Request, res: Response) => {
@@ -23,7 +24,15 @@ const TransactionController = {
   show: async (req: Request, res: Response) => {
     try {
       const transaction = await Transaction.findAll({
-        where: { id: req.params.id },
+        where: { userId: req.params.id },
+        include: [
+          {
+            model: Wallet,
+          },
+          {
+            model: Category
+          }
+        ]
       });
 
       if (!transaction) {
