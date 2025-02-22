@@ -4,6 +4,8 @@ import User from "../user/User";
 import Wallet from "../wallet/Wallet";
 
 async function sync() {
+  User.hasMany(Wallet);
+  User.hasMany(Category);
   await User.sync()
     .then(() => {
       console.log("User Table created successfully.");
@@ -13,6 +15,7 @@ async function sync() {
     });
 
   Wallet.belongsTo(User);
+  Wallet.hasMany(Transaction);
   await Wallet.sync()
     .then(() => {
       console.log("Wallet Table created successfully.");
@@ -22,6 +25,7 @@ async function sync() {
     });
 
   Category.belongsTo(User);
+  Category.hasMany(Transaction);
   await Category.sync()
     .then(() => {
       console.log("Category Table created successfully.");
