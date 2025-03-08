@@ -24,6 +24,10 @@ const Wallet = db.define("wallet", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  walletNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   userId: {
     type: DataTypes.UUID,
     allowNull: false,
