@@ -8,6 +8,10 @@ const Transaction = db.define("transaction", {
     defaultValue: UUIDV4,
     primaryKey: true,
   },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   amount: {
     type: DataTypes.DECIMAL,
     allowNull: false,
@@ -40,6 +44,6 @@ const Transaction = db.define("transaction", {
       key: "id",
     },
   },
-});
+}, { paranoid: true });
 
 export default Transaction;

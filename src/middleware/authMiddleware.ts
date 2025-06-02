@@ -22,14 +22,14 @@ function authenticateToken(
     });
   }
 
-	const user = User.findOne({ where: { token: token } });
+  const user = User.findOne({ where: { token: token } });
 
-	if (!user) {
-		return res.status(401).json({
-			status: 401,
-			message: "Your account has logged in from another device.",
-		})
-	}
+  if (!user) {
+    return res.status(401).json({
+      status: 401,
+      message: "Your account has logged in from another device.",
+    });
+  }
 
   try {
     const secretKey = `${config.jwt}`;
