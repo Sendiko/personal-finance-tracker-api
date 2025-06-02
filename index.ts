@@ -4,7 +4,7 @@ import router from "./src/router/route";
 import { default as sync } from "./src/database/sync";
 const path = require("path");
 const app = express();
-const port = 3000;
+const port = 3001;
 
 sync();
 app.use(express.static(path.join(__dirname, "public")));
