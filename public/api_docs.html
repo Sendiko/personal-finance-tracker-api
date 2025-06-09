@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        .container {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+        }
+        h1 {
+            color: #1f2937; /* text-gray-900 */
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        h2 {
+            color: #1f2937;
+            font-size: 1.75rem; /* text-3xl */
+            font-weight: 600; /* semibold */
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb; /* border-b-2 border-gray-200 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            color: #374151; /* text-gray-800 */
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .endpoint-section {
+            background-color: #f9fafb; /* bg-gray-50 */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e7eb; /* border border-gray-200 */
+        }
+        .endpoint-section p {
+            margin-bottom: 0.5rem;
+        }
+        .code-block {
+            background-color: #1f2937; /* bg-gray-900 */
+            color: #f9fafb; /* text-gray-50 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+        }
+        .method-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: bold;
+            color: white;
+            margin-right: 0.5rem;
+        }
+        .method-post { background-color: #22c55e; /* bg-green-500 */ }
+        .method-get { background-color: #0ea5e9; /* bg-sky-500 */ }
+        .method-put { background-color: #f97316; /* bg-orange-500 */ }
+        .method-delete { background-color: #ef4444; /* bg-red-500 */ }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Finance Tracker API Documentation</h1>
+
+        <p class="text-gray-600 mb-6 text-center">
+            This document outlines the API endpoints for the Personal Finance Tracker.
+            <br>
+            <strong>Base URL:</strong> <code class="bg-gray-100 p-1 rounded"> &#123;&#123;production-server&#125;&#125;</code> (This is a placeholder and should be replaced with the actual production server URL.)
+        </p>
+
+        <hr class="my-8 border-gray-300">
+
+        <h2>1. User Endpoints</h2>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /register</h3>
+            <p><strong>Description:</strong> Registers a new user.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Sendiko",
+                    "email": "rizkysendiko7@gmail.com",
+                    "password": "00119922"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> None</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /login</h3>
+            <p><strong>Description:</strong> Logs in an existing user and returns an authentication token.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Sendiko",
+                    "password": "00119922"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> None</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /users/{userId}</h3>
+            <p><strong>Description:</strong> Updates an existing user's information. Replace <code>{userId}</code> with the actual user ID.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Sendikoo"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token (e.g., <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2VuZGlrbyIsImlhdCI6MTc0OTQ0MDU0MH0.vNXODtOAKgDsaq4wdME5Qc5ExU-m2QtIg8X0Usl-1KA</code>)</p>
+        </div>
+
+        <h2>2. Wallet Endpoints</h2>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /wallets/</h3>
+            <p><strong>Description:</strong> Retrieves all wallets for the authenticated user.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /wallets</h3>
+            <p><strong>Description:</strong> Creates a new wallet.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Daily Spending",
+                    "purpose": "Spending",
+                    "type": "card",
+                    "balance": 0.0,
+                    "userId": "6ac6b327-47c0-4e8a-adbb-4c1b075f162c"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /wallets/{walletId}</h3>
+            <p><strong>Description:</strong> Updates an existing wallet's information. Replace <code>{walletId}</code> with the actual wallet ID.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "type": "e-money"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <h2>3. Category Endpoints</h2>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /categories/{userId}</h3>
+            <p><strong>Description:</strong> Retrieves all categories for a specific user. Replace <code>{userId}</code> with the actual user ID.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /categories</h3>
+            <p><strong>Description:</strong> Creates a new category.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Food and Beverage",
+                    "userId": "6ac6b327-47c0-4e8a-adbb-4c1b075f162c"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /categories/{categoryId}</h3>
+            <p><strong>Description:</strong> Updates an existing category's information. Replace <code>{categoryId}</code> with the actual category ID.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Foods and Beverages"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <h2>4. Transaction Endpoints</h2>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /transactions/{userId}</h3>
+            <p><strong>Description:</strong> Retrieves all transactions for a specific user. Replace <code>{userId}</code> with the actual user ID.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /transactions</h3>
+            <p><strong>Description:</strong> Creates a new transaction.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Luch at KFC",
+                    "amount": 50000,
+                    "type": "expense",
+                    "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
+                    "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
+                    "userId": "6ac6b327-47c0-4e8a-adbb-4c1b075f162c"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /transactions/{transactionId}</h3>
+            <p><strong>Description:</strong> Updates an existing transaction's information. Replace <code>{transactionId}</code> with the actual transaction ID.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "name": "Lunch at KFC"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-delete">DELETE</span> /transactions/{transactionId}</h3>
+            <p><strong>Description:</strong> Deletes a specific transaction. Replace <code>{transactionId}</code> with the actual transaction ID.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+    </div>
+</body>
+</html>

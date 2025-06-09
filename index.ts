@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.get("/api_docs", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "api_docs.html"));
+});
+
 app.use(router);
 
 app.listen(port, () => {
