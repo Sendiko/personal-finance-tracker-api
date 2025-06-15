@@ -19,7 +19,7 @@ const UserController = {
 
       const user = await User.findOne({
         where: { email },
-        include: { all: true },
+        attributes: ["id", "name", "email"],
       });
 
       if (!user) {
@@ -32,7 +32,7 @@ const UserController = {
       return res.status(200).json({
         status: 200,
         message: "User fetched successfully.",
-        user,
+        user: user,
       });
     } catch (error: any) {
       return res.status(500).json({
