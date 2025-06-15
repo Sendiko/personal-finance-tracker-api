@@ -14,7 +14,7 @@ router.post("/register", UserController.store);
 router.post("/login", UserController.login);
 router.put("/users/:id", authenticateToken, UserController.update);
 router.delete("/users/:id", authenticateToken, UserController.delete);
-router.put("/user/change-password", UserController.changePassword)
+router.put("/user/change-password/:id", UserController.changePassword)
 
 router.get("/categories", authenticateToken, CategoryController.index);
 router.get("/categories/:id", authenticateToken, CategoryController.show);
