@@ -8,7 +8,7 @@ import authenticateToken from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.get("/users", authenticateToken, UserController.index);
+router.get("/users", UserController.getByEmail);
 router.get("/users/:id", authenticateToken, UserController.show);
 router.post("/register", UserController.store);
 router.post("/login", UserController.login);
