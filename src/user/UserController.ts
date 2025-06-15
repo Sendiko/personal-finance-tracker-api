@@ -203,6 +203,41 @@ const UserController = {
       });
     }
   },
+  changePassword: async (req: Request, res: Response) => {
+    try {
+      const { password } = req.body;
+
+      if (!password) {
+        return res.status(400).json({
+          status: 400,
+          message: "Password is required.",
+        });
+      }
+
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res.status(404).json({
+          status: 404,
+          message: "User not found.",
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await user.update({ password: hashedPassword });
+
+      return res.status(200).json({
+        status: 200,
+        message: "Password reset successfully.",
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        status: 500,
+        message: "Server error.",
+        error: error.message,
+      });
+    }
+  },
   statistics: async (req: Request, res: Response) => {
     try {
       const user = await User.findByPk(req.params.id);
