@@ -7,6 +7,43 @@ import Wallet from "../wallet/Wallet";
 import Transaction from "../transaction/Transaction";
 
 const UserController = {
+  getByEmail: async (req: Request, res: Response) => {
+    try {
+      const email = req.query.email as string;
+      if (!email) {
+        return res.status(400).json({
+          status: 400,
+          message: "Email query parameter is required.",
+        });
+      }
+
+      const user = await User.findOne({
+        where: { email },
+        include: { all: true },
+      });
+
+      if (!user) {
+        return res.status(404).json({
+          status: 404,
+          message: "User not found.",
+        });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        message: "User fetched successfully.",
+        user,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        status: 500,
+        message: "Server error.",
+        error: error.message,
+      });
+    }
+  },
+
+  // ...other methods...
   index: async (req: Request, res: Response) => {
     try {
       const users = await User.findAll();
@@ -81,6 +118,11 @@ const UserController = {
           status: 404,
           message: "User not found.",
         });
+      }
+
+      // If password is being updated, hash it before saving
+      if (req.body.password) {
+        req.body.password = await bcrypt.hash(req.body.password, 10);
       }
 
       await user.update(req.body);
@@ -196,6 +238,7 @@ const UserController = {
       })
     }
   },
+
 };
 
 export default UserController;
