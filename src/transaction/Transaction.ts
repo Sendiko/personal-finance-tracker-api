@@ -15,6 +15,10 @@ const Transaction = db.define("transaction", {
   amount: {
     type: DataTypes.DECIMAL,
     allowNull: false,
+    get() {
+        const value = this.getDataValue('amount');
+        return value === null ? null: parseFloat(value);
+    },
   },
   type: {
     type: DataTypes.ENUM("income", "expense"),
