@@ -24,7 +24,7 @@ const WalletController = {
   show: async (req: Request, res: Response) => {
     try {
       const wallet = await Wallet.findOne({
-        where: { id: req.params.id },
+        where: { userId: req.params.id },
         include: Transaction
       });
 

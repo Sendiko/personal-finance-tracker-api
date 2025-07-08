@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Transaction from "../transaction/Transaction";
 import Category from "./Category";
+import { log } from "console";
 
 const CategoryController = {
   index: async (req: Request, res: Response) => {
@@ -23,7 +24,7 @@ const CategoryController = {
   show: async (req: Request, res: Response) => {
     try {
       const category = await Category.findOne({
-        where: { id: req.params.id },
+        where: { userId: req.params.id },
         include: Transaction
       });
 
