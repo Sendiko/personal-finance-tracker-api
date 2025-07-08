@@ -22,8 +22,8 @@ const CategoryController = {
   },
   show: async (req: Request, res: Response) => {
     try {
-      const category = await Category.findAll({
-        where: { userId: req.params.id },
+      const category = await Category.findOne({
+        where: { id: req.params.id },
         include: Transaction
       });
 
