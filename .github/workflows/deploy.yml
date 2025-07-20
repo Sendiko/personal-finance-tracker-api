@@ -1,0 +1,50 @@
+
+name: Express.js CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+
+  deploy:
+    needs: build 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }} 
+          username: ${{ secrets.SSH_USER }} 
+          key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          port: ${{ secrets.SSH_PORT || 2222 }} 
+          script: |
+            cd /personal-finance-tracker-api
+            git pull origin main 
+            npm install --omit=dev 
+            npm run build 
+            pm2 restart fintrack
