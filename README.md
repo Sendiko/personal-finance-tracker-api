@@ -21,7 +21,7 @@ Backend API untuk aplikasi Personal Finance Tracker sebagai materi untuk pembela
 
 ## Documentation
 
-Dokumentasi dapat dilihat di [Dokumentasi Postman.](https://documenter.getpostman.com/view/21050563/2sAYdcrCJs)
+Dokumentasi dapat dilihat di [sini.](https://fintrack.sendiko.my.id/api_docs.html)
 
 ## Contributing
 
