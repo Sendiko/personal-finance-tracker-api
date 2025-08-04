@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
 import Transaction from "../transaction/Transaction";
 import Wallet from "./Wallet";
+import User from "../user/User";
 
 
 const WalletController = {
   index: async (req: Request, res: Response) => {
     try {
-      const wallets = await Wallet.findAll();
+      // @ts-ignore User comes from middleware
+      const userName = req.user;
+      const user = await User.findOne({where: { name: userName.name }});
+      const wallets = await Wallet.findAll({where: {userId: user?.dataValues.id}});
 
       return res.status(200).json({
         status: 200,
