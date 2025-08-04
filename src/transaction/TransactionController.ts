@@ -10,7 +10,14 @@ const TransactionController = {
       // @ts-ignore User comes from middleware
       const userName = req.user;
       const user = await User.findOne({where: { name: userName.name }});
-      const transactions = await Transaction.findAll({where: {userId: user?.dataValues.id}});
+      const transactions = await Transaction.findAll(
+        {
+          where: { userId: user?.dataValues.id },
+          include: [
+            Wallet, Category
+          ]
+        }
+      );;
 
       return res.status(200).json({
         status: 200,

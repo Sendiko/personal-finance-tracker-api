@@ -10,7 +10,12 @@ const CategoryController = {
       // @ts-ignore User comes from middleware
       const userName = req.user;
       const user = await User.findOne({where: { name: userName.name }});
-      const categories = await Category.findAll({where: {userId: user?.dataValues.id}});
+      const categories = await Category.findAll(
+        {
+          where: { userId: user?.dataValues.id },
+          include: Transaction
+        }
+      );
 
       return res.status(200).json({
         status: 200,
