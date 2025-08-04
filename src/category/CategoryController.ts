@@ -2,11 +2,15 @@ import { Request, Response } from "express";
 import Transaction from "../transaction/Transaction";
 import Category from "./Category";
 import { log } from "console";
+import User from "../user/User";
 
 const CategoryController = {
   index: async (req: Request, res: Response) => {
     try {
-      const categories = await Category.findAll();
+      // @ts-ignore User comes from middleware
+      const userName = req.user;
+      const user = await User.findOne({where: { name: userName.name }});
+      const categories = await Category.findAll({where: {userId: user?.dataValues.id}});
 
       return res.status(200).json({
         status: 200,
