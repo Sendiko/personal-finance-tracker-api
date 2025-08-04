@@ -10,7 +10,12 @@ const WalletController = {
       // @ts-ignore User comes from middleware
       const userName = req.user;
       const user = await User.findOne({where: { name: userName.name }});
-      const wallets = await Wallet.findAll({where: {userId: user?.dataValues.id}});
+      const wallets = await Wallet.findAll(
+        {
+          where: { userId: user?.dataValues.id },
+          include: Transaction
+        }
+      );
 
       return res.status(200).json({
         status: 200,
@@ -28,7 +33,7 @@ const WalletController = {
   show: async (req: Request, res: Response) => {
     try {
       const wallet = await Wallet.findOne({
-        where: { userId: req.params.id },
+        where: { id: req.params.id },
         include: Transaction
       });
 
