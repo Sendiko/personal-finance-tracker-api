@@ -90,10 +90,30 @@ const UserController = {
   },
   store: async (req: Request, res: Response) => {
     try {
+      const { name, email, password } = req.body;
+
+      if (!email) {
+        return res.status(400).json({
+          status: 400,
+          message: "Email is required.",
+        });
+      }
+
+      const existingUser = await User.findOne({
+        where: { email },
+      });
+
+      if (existingUser) {
+        return res.status(400).json({
+          status: 400,
+          message: "Email is already registered.",
+        });
+      }
+
       const user = await User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: await bcrypt.hash(req.body.password, 10),
+        name,
+        email,
+        password: await bcrypt.hash(password, 10),
       });
 
       return res.status(201).json({
@@ -102,6 +122,12 @@ const UserController = {
         user: user,
       });
     } catch (error: any) {
+      if (error.name === "SequelizeUniqueConstraintError") {
+        return res.status(400).json({
+          status: 400,
+          message: "Email is already registered.",
+        });
+      }
       return res.status(500).json({
         status: 500,
         message: "Server error.",
@@ -111,7 +137,7 @@ const UserController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id as string);
 
       if (!user) {
         return res.status(404).json({
@@ -142,7 +168,7 @@ const UserController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id as string);
 
       if (!user) {
         return res.status(404).json({
@@ -214,7 +240,7 @@ const UserController = {
         });
       }
 
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id as string);
 
       if (!user) {
         return res.status(404).json({
@@ -240,7 +266,7 @@ const UserController = {
   },
   statistics: async (req: Request, res: Response) => {
     try {
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id as string);
       if (!user) {
         return res.status(404).json({
           status: 404,
