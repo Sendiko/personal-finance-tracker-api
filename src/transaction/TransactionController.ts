@@ -34,8 +34,7 @@ const TransactionController = {
   },
   show: async (req: Request, res: Response) => {
     try {
-      const transaction = await Transaction.findAll({
-        where: { id: req.params.id },
+      const transaction = await Transaction.findByPk(req.params.id, {
         include: [
           {
             model: Wallet,
