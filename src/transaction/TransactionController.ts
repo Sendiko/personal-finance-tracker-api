@@ -35,7 +35,7 @@ const TransactionController = {
   show: async (req: Request, res: Response) => {
     try {
       const transaction = await Transaction.findAll({
-        where: { userId: req.params.id },
+        where: { id: req.params.id },
         include: [
           {
             model: Wallet,
