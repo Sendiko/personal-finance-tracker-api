@@ -67,7 +67,10 @@ const TransactionController = {
   },
   store: async (req: Request, res: Response) => {
     try {
-      const transaction = await Transaction.create(req.body);
+      const transactionData = req.body.date 
+        ? { ...req.body, createdAt: req.body.date }
+        : req.body;
+      const transaction = await Transaction.create(transactionData);
 
       // @ts-ignore: transaction has type
       if (transaction.type === "expense") {
