@@ -76,7 +76,7 @@ const WalletController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const wallet = await Wallet.findByPk(req.params.id);
+      const wallet = await Wallet.findByPk(req.params.id as string);
 
       if (!wallet) {
         return res.status(404).json({
@@ -102,7 +102,7 @@ const WalletController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      const wallet = await Wallet.findByPk(req.params.id);
+      const wallet = await Wallet.findByPk(req.params.id as string);
 
       if (!wallet) {
         return res.status(404).json({

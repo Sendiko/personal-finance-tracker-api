@@ -34,7 +34,7 @@ const TransactionController = {
   },
   show: async (req: Request, res: Response) => {
     try {
-      const transaction = await Transaction.findByPk(req.params.id, {
+      const transaction = await Transaction.findByPk(req.params.id as string, {
         include: [
           {
             model: Wallet,
@@ -122,7 +122,7 @@ const TransactionController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const transaction = await Transaction.findByPk(req.params.id);
+      const transaction = await Transaction.findByPk(req.params.id as string);
 
       if (!transaction) {
         return res.status(404).json({
@@ -186,7 +186,7 @@ const TransactionController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      const transaction = await Transaction.findByPk(req.params.id);
+      const transaction = await Transaction.findByPk(req.params.id as string);
 
       if (!transaction) {
         return res.status(404).json({

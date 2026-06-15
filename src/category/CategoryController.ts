@@ -76,7 +76,7 @@ const CategoryController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const category = await Category.findByPk(req.params.id);
+      const category = await Category.findByPk(req.params.id as string);
 
       if (!category) {
         return res.status(404).json({
@@ -102,7 +102,7 @@ const CategoryController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      const category = await Category.findByPk(req.params.id);
+      const category = await Category.findByPk(req.params.id as string);
 
       if (!category) {
         return res.status(404).json({
