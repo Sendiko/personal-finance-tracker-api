@@ -26,7 +26,7 @@ async function sync() {
 
   Category.belongsTo(User);
   Category.hasMany(Transaction);
-  await Category.sync()
+  await Category.sync({ alter: true })
     .then(() => {
       console.log("Category Table created successfully.");
     })

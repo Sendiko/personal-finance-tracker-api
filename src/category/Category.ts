@@ -20,6 +20,25 @@ const Category = db.define("category", {
       key: "id", // key in the target model that we're referencing
     },
   },
+  budget: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+    defaultValue: 0,
+    get() {
+      const value = this.getDataValue("budget");
+      return value === null ? null : parseFloat(value);
+    },
+  },
+  color: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "#3B82F6",
+  },
+  icon: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "folder",
+  },
 });
 
 export default Category;

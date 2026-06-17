@@ -4,6 +4,7 @@ import UserController from "../user/UserController";
 import CategoryController from "../category/CategoryController";
 import WalletController from "../wallet/WalletController";
 import TransactionController from "../transaction/TransactionController";
+import AnalysisController from "../analysis/AnalysisController";
 import authenticateToken from "../middleware/authMiddleware";
 
 const router = express.Router();
@@ -41,5 +42,7 @@ router.delete(
   authenticateToken,
   TransactionController.delete
 );
+
+router.get("/analysis/spending", authenticateToken, AnalysisController.getSpendingAnalysis);
 
 export default router;
