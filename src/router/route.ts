@@ -29,6 +29,7 @@ router.post("/wallets", authenticateToken, WalletController.store);
 router.put("/wallets/:id", authenticateToken, WalletController.update);
 router.delete("/wallets/:id", authenticateToken, WalletController.delete);
 
+router.get("/extract", authenticateToken, TransactionController.extractReceipt);
 router.get("/transactions", authenticateToken, TransactionController.index);
 router.get("/transactions/:id", authenticateToken, TransactionController.show);
 router.post("/transactions", authenticateToken, TransactionController.store);
