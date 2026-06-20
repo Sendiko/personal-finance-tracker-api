@@ -5,6 +5,8 @@ import Category from "../category/Category";
 import User from "../user/User";
 import { Ollama } from "ollama";
 
+const ollama = new Ollama({ host: "http://localhost:11434" });
+
 const TransactionController = {
   index: async (req: Request, res: Response) => {
     try {
@@ -229,45 +231,45 @@ const TransactionController = {
         });
       }
 
-      const ollama = new Ollama({ host: "http://localhost:11434" });
-
-      const prompt = `Extract the following information from this receipt text and return it as JSON:
-                      1. receipt_name: The name/merchant name of the receipt
-                      2. total_price: The total amount paid
-                      3. products: An array of products with name and price for each item
-
-                      Receipt Text:
-                      ${receiptText}
-
-                      Return ONLY valid JSON in this format:
-                      {
-                        "receipt_name": "string",
-                        "total_price": number,
-                        "products": [
-                          { "name": "string", "price": number },
-                          ...
-                        ]
-                      }`;
-
-      const response = await ollama.generate({
+      // Call Ollama with a strict JSON schema for guaranteed, fast structured outputs
+      const response = await ollama.chat({
         model: "llama3.2:3b",
-        prompt: prompt,
-        stream: false,
+        messages: [
+          {
+            role: "system",
+            content: "You are an Indonesian receipt parser. Extract data accurately. Note: Periods in Indonesian prices represent thousands (e.g., 38.400 means 38400) - return them as pure numbers."
+          },
+          {
+            role: "user",
+            content: `Extract from this raw text:\n\n${receiptText}`
+          }
+        ],
+        format: {
+          type: 'object',
+          properties: {
+            receipt_name: { type: 'string', description: 'The merchant or store name.' },
+            total_price: { type: 'number', description: 'The total grand amount paid.' },
+            products: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  name: { type: 'string' },
+                  price: { type: 'number' }
+                },
+                required: ['name', 'price']
+              }
+            }
+          },
+          required: ['receipt_name', 'total_price', 'products']
+        },
+        options: {
+          temperature: 0.0, // Maximizes speed and processing efficiency
+        }
       });
 
-      // Parse the response from Ollama
-      const responseText = response.response;
-      const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-
-      if (!jsonMatch) {
-        return res.status(422).json({
-          status: 422,
-          message: "Failed to extract receipt information.",
-          error: "Could not parse receipt data from Ollama response",
-        });
-      }
-
-      const extractedData = JSON.parse(jsonMatch[0]);
+      // Parse the guaranteed JSON string from the model
+      const extractedData = JSON.parse(response.message.content);
 
       return res.status(200).json({
         status: 200,
@@ -279,6 +281,7 @@ const TransactionController = {
         },
       });
     } catch (error: any) {
+      console.error("Extraction error:", error);
       return res.status(500).json({
         status: 500,
         message: "Server error.",
