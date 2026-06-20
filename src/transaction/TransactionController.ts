@@ -250,7 +250,7 @@ const TransactionController = {
                       }`;
 
       const response = await ollama.generate({
-        model: "llama2",
+        model: "llama3.2:3b",
         prompt: prompt,
         stream: false,
       });
