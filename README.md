@@ -21,7 +21,9 @@ Backend API untuk aplikasi Personal Finance Tracker sebagai materi untuk pembela
 
 ## Documentation
 
-Dokumentasi dapat dilihat di [sini.](https://fintrack.sendiko.my.id/api_docs.html)
+- Comprehensive Technical Specification & Rebuilding Blueprint: [API_SPECIFICATION.md](API_SPECIFICATION.md)
+- Web documentation can also be viewed at [fintrack.sendiko.dev/api_docs.html](https://fintrack.sendiko.dev/api_docs.html)
+
 
 ## Contributing
 
