@@ -44,6 +44,10 @@ router.delete(
   TransactionController.delete
 );
 
+router.get("/receipts/:userId", authenticateToken, ReceiptController.index);
+router.post("/receipts", authenticateToken, ReceiptController.store);
+router.get("/receipts/count/all", authenticateToken, ReceiptController.count);
+
 router.get("/analysis/spending", authenticateToken, AnalysisController.getSpendingAnalysis);
 
 export default router;
