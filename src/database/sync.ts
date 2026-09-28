@@ -1,4 +1,5 @@
 import Category from "../category/Category";
+import Receipt from "../receipt/receipt";
 import Transaction from "../transaction/Transaction";
 import User from "../user/User";
 import Wallet from "../wallet/Wallet";
@@ -13,6 +14,13 @@ async function sync() {
     .catch((err) => {
       console.log("Error: " + err);
     });
+
+  Receipt.belongsTo(User);
+  await Receipt.sync()
+    .then(() => console.log("Receipt Table created successfully"))
+    .catch((err) => {
+      console.log("Error: " + err)
+    })
 
   Wallet.belongsTo(User);
   Wallet.hasMany(Transaction);
