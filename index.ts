@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { Request, Response } from "express";
 import router from "./src/router/route";
 import { default as sync } from "./src/database/sync";
@@ -10,6 +11,7 @@ const port = config.port;
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors({ origin: config.corsOrigin }));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

@@ -25,6 +25,7 @@ services:
         condition: service_healthy
     environment:
       APP_PORT: 3000
+      CORS_ORIGIN: ${CORS_ORIGIN:?CORS_ORIGIN must be set in .env}
       DB_NAME: ${DB_NAME:-personal_finance}
       DB_USER: ${DB_USER:-finance}
       DB_PASS: ${DB_PASS:-change-me}

@@ -4,6 +4,7 @@ dotenv.config();
 
 const config = {
   port: process.env.APP_PORT || 3000,
+  corsOrigin: process.env.CORS_ORIGIN || "",
   db: {
     name: process.env.DB_NAME || "",
     user: process.env.DB_USER || "",

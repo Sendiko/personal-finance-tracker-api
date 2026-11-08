@@ -51,7 +51,9 @@ npm install
 npm run build
 ```
 
-Configure `DB_NAME`, `DB_USER`, `DB_PASS`, and `DB_HOST` in `.env`, then use:
+Configure `CORS_ORIGIN`, `DB_NAME`, `DB_USER`, `DB_PASS`, and `DB_HOST` in `.env`, then use:
+
+For local frontend development, set `CORS_ORIGIN=http://localhost:3000`.
 
 | Command | Purpose |
 | --- | --- |
