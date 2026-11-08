@@ -757,6 +757,7 @@ Lists all transactions created by the authenticated user, joined with their Cate
         "name": "Supermarket Groceries",
         "amount": 245000,
         "type": "expense",
+        "isTransfer": false,
         "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
         "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
         "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",
@@ -806,6 +807,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
     "name": "Lunch at Warung Padang",
     "amount": 35000,
     "type": "expense",
+    "isTransfer": false,
     "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
     "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
     "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",
@@ -817,6 +819,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
   | `name` | string | Yes | Description / title |
   | `amount` | decimal | Yes | Absolute transaction amount |
   | `type` | enum | Yes | `'income'` or `'expense'` |
+  | `isTransfer` | boolean | No | Set to `true` for a transfer between wallets. Transfer transactions are excluded from expense/income statistics and analysis. Defaults to `false`. |
   | `categoryId`| UUID | Yes | Foreign key to `categories` |
   | `walletId` | UUID | Yes | Foreign key to `wallets` |
   | `userId` | UUID | Yes | Owner foreign key to `users` |
@@ -837,6 +840,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
       "name": "Lunch at Warung Padang",
       "amount": 35000,
       "type": "expense",
+      "isTransfer": false,
       "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
       "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
       "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",

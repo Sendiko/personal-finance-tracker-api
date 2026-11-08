@@ -61,6 +61,7 @@ const AnalysisController = {
         where: {
           userId,
           type: "expense",
+          isTransfer: false,
           createdAt: {
             [Op.between]: [startDateObj, endDateObj],
           },
@@ -150,6 +151,7 @@ const AnalysisController = {
         where: {
           userId,
           type: "expense",
+          isTransfer: false,
           createdAt: {
             [Op.between]: [startOfHistory, endOfHistory],
           },

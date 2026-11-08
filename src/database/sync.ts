@@ -38,7 +38,7 @@ async function sync() {
   Transaction.belongsTo(User);
   Transaction.belongsTo(Category);
   Transaction.belongsTo(Wallet);
-  await Transaction.sync()
+  await Transaction.sync({ alter: true })
     .then(() => {
       console.log("Transaction Table created successfully.");
     })
