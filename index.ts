@@ -7,7 +7,6 @@ import path from "path";
 const app = express();
 const port = config.port;
 
-sync();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +21,16 @@ app.get("/api_docs", (req, res) => {
 
 app.use(router);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+async function start() {
+  try {
+    await sync();
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error("Database synchronization failed:", error);
+    process.exitCode = 1;
+  }
+}
+
+start();
