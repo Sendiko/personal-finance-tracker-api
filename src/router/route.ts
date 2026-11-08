@@ -6,6 +6,7 @@ import WalletController from "../wallet/WalletController";
 import TransactionController from "../transaction/TransactionController";
 import AnalysisController from "../analysis/AnalysisController";
 import authenticateToken from "../middleware/authMiddleware";
+import BudgetController from "../budget/BudgetController";
 
 const router = express.Router();
 
@@ -29,7 +30,6 @@ router.post("/wallets", authenticateToken, WalletController.store);
 router.put("/wallets/:id", authenticateToken, WalletController.update);
 router.delete("/wallets/:id", authenticateToken, WalletController.delete);
 
-router.get("/extract", authenticateToken, TransactionController.extractReceipt);
 router.get("/transactions", authenticateToken, TransactionController.index);
 router.get("/transactions/:id", authenticateToken, TransactionController.show);
 router.post("/transactions", authenticateToken, TransactionController.store);
@@ -44,9 +44,12 @@ router.delete(
   TransactionController.delete
 );
 
-router.get("/receipts/:userId", authenticateToken, ReceiptController.index);
-router.post("/receipts", authenticateToken, ReceiptController.store);
-router.get("/receipts/count/all", authenticateToken, ReceiptController.count);
+router.get("/budgets", authenticateToken, BudgetController.index);
+router.get("/budgets/:id/today", authenticateToken, BudgetController.today);
+router.get("/budgets/:id", authenticateToken, BudgetController.show);
+router.post("/budgets", authenticateToken, BudgetController.store);
+router.put("/budgets/:id", authenticateToken, BudgetController.update);
+router.delete("/budgets/:id", authenticateToken, BudgetController.delete);
 
 router.get("/analysis/spending", authenticateToken, AnalysisController.getSpendingAnalysis);
 

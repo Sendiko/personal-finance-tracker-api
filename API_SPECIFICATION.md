@@ -19,12 +19,11 @@
    - [Wallet Management](#wallet-management)
    - [Category Management](#category-management)
    - [Transaction Management](#transaction-management)
-   - [Receipt AI Extraction Engine](#receipt-ai-extraction-engine)
+   - [Budget Management](#budget-management)
    - [Spending Analysis Engine](#spending-analysis-engine)
 6. [Core Business Logic & State Machines](#6-core-business-logic--state-machines)
    - [Automated Balance Synchronization](#automated-balance-synchronization)
    - [Analytics Date Calculations & MoM Formula](#analytics-date-calculations--mom-formula)
-   - [AI Prompting & Structured Extraction](#ai-prompting--structured-extraction)
 7. [Identified Quirks, Legacy Bugs & Recommendations](#7-identified-quirks-legacy-bugs--recommendations)
 8. [Framework Migration & Verification Checklist](#8-framework-migration--verification-checklist)
 
@@ -40,7 +39,6 @@ The Personal Finance Tracker API is a RESTful backend service built to power mob
 - **Budgeting & Categorization:** Custom categories per user with color codes, icons, and monthly spending budget targets.
 - **Double-Entry Balance Adjustments:** Automatic wallet balance updates triggered by income and expense transactions.
 - **Auditability / Paranoid Deletions:** Soft-deletion (`paranoid`) on financial transactions to prevent accidental permanent data loss.
-- **AI-Powered OCR / Receipt Extraction:** Local LLM integration (via Ollama and `llama3.2:3b`) to convert raw scanned receipt text into structured merchant, price, and line items.
 - **Analytics & Trends:** Real-time spending breakdowns against budgets, custom date filtering, and 6-month historical Month-over-Month (MoM) trend calculations.
 
 ---
@@ -58,8 +56,6 @@ The following environment variables are required by the service:
 | `DB_USER` | String | *Required* | Database user | `fintrack_user` |
 | `DB_PASS` | String | *Required* | Database password | `secret_password` |
 | `JWT_SECRET`| String | *Required* | Symmetric key used to sign and verify JWTs | `super-secret-jwt-key` |
-| `OLLAMA_HOST` | String | `http://localhost:11434` | Endpoint for Ollama LLM service *(hardcoded in current code, recommended to make configurable)* | `http://127.0.0.1:11434` |
-| `OLLAMA_MODEL` | String | `llama3.2:3b` | LLM model identifier for receipt extraction | `llama3.2:3b` |
 
 ---
 
@@ -189,6 +185,21 @@ Records financial movement. Configured with **paranoid soft delete**.
 | `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Effective transaction date *(can be set manually on creation)* |
 | `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last modified timestamp |
 | `deletedAt` | TIMESTAMP | `NULLABLE` | `NULL` | Soft delete timestamp (`paranoid: true`) |
+
+---
+
+#### 5. `budgets` Table
+Stores a general user budget independent of wallets. Expense transactions are matched by `userId` and their effective `createdAt` date.
+
+| Column | Type | Constraints | Default | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | UUID (v4) | `PRIMARY KEY` | Auto UUID v4 | Unique identifier |
+| `userId` | UUID (v4) | `NOT NULL, FK -> users(id)` | None | Budget owner |
+| `amount` | DECIMAL(15, 2) | `NOT NULL` | None | Total budget for the inclusive date range |
+| `startDate` | DATE | `NOT NULL` | None | First day covered, `YYYY-MM-DD` |
+| `endDate` | DATE | `NOT NULL` | None | Last day covered, `YYYY-MM-DD` |
+| `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Creation timestamp |
+| `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last update timestamp |
 
 ---
 
@@ -871,79 +882,39 @@ Creates a transaction and immediately syncs the associated wallet's balance.
 
 ---
 
-### Receipt AI Extraction Engine
+### Budget Management
 
-Extracts merchant name, grand total, and itemized product lists from OCR'd receipt text using an LLM.
+Budgets are general user-level limits and are not linked to a wallet. Every expense transaction owned by the user, regardless of wallet, counts toward the budget. Dates are inclusive and use `YYYY-MM-DD`.
 
-- **Route:** `GET /extract` *(Recommended in new framework: change to `POST /extract`)*
-- **Auth:** Bearer Token
-- **Request Body (JSON):**
-  ```json
-  {
-    "receiptText": "INDOMARET\nJL. SUDIRMAN NO 45\nROTI TAWAR 15.000\nSUSU UHT 18.400\nTOTAL 33.400\nTUNAI 50.000\nKEMBALI 16.600"
-  }
-  ```
-  | Field | Type | Required | Description |
-  | :--- | :--- | :--- | :--- |
-  | `receiptText` | string | Yes | Raw string text extracted by client-side OCR |
+#### 1. List Budgets
 
-- **Ollama LLM Configuration:**
-  - **Host:** `http://localhost:11434`
-  - **Model:** `llama3.2:3b`
-  - **Temperature:** `0.0` (zero randomness for determinism)
-  - **System Prompt:**
-    ```text
-    You are an Indonesian receipt parser. Extract data accurately. Note: Periods in Indonesian prices represent thousands (e.g., 38.400 means 38400) - return them as pure numbers.
-    ```
-  - **Output JSON Schema (Format):**
-    ```json
-    {
-      "type": "object",
-      "properties": {
-        "receipt_name": { "type": "string", "description": "The merchant or store name." },
-        "total_price": { "type": "number", "description": "The total grand amount paid." },
-        "products": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": { "type": "string" },
-              "price": { "type": "number" }
-            },
-            "required": ["name", "price"]
-          }
-        }
-      },
-      "required": ["receipt_name", "total_price", "products"]
-    }
-    ```
+- **Route:** `GET /budgets`
+- Returns each budget with a `summary` containing `totalAmount`, `spent`, `remainingAmount`, `remainingDays`, `todayBudget`, `spentToday`, `remainingToday`, and `isActive`.
 
-- **Success Response (200 OK):**
-  ```json
-  {
-    "status": 200,
-    "message": "Receipt information extracted successfully.",
-    "data": {
-      "receipt_name": "INDOMARET",
-      "total_price": 33400,
-      "products": [
-        {
-          "name": "ROTI TAWAR",
-          "price": 15000
-        },
-        {
-          "name": "SUSU UHT",
-          "price": 18400
-        }
-      ]
-    }
-  }
-  ```
-- **Error Responses:**
-  - `400 Bad Request`: `{"status": 400, "message": "Receipt text is required."}`
-  - `500 Internal Server Error`: `{"status": 500, "message": "Server error.", "error": "..."}`
+#### 2. Get a Budget
 
----
+- **Route:** `GET /budgets/:id`
+
+#### 3. Get Today's Budget
+
+- **Route:** `GET /budgets/:id/today`
+- `todayBudget` is the remaining budget divided evenly across the remaining days, including today. This recalculates after spending, so an exhausted day automatically redistributes the remaining amount across the remaining timeline.
+
+#### 4. Create a Budget
+
+- **Route:** `POST /budgets`
+- **Request body:** `{ "amount": 1000, "startDate": "2026-11-01", "endDate": "2026-11-30" }`
+- `amount` must be greater than zero and `startDate` cannot be after `endDate`.
+
+#### 5. Update a Budget
+
+- **Route:** `PUT /budgets/:id`
+- Accepts any subset of `amount`, `startDate`, and `endDate`.
+
+#### 6. Delete a Budget
+
+- **Route:** `DELETE /budgets/:id`
+
 
 ### Spending Analysis Engine
 
@@ -1103,24 +1074,6 @@ The `/analysis/spending` endpoint strictly filters `type = "expense"` and `delet
 
 ---
 
-### AI Prompting & Structured Extraction
-
-To replicate the `/extract` endpoint:
-1. Connect to Ollama API or any compliant LLM provider (OpenAI, Anthropic, or local model).
-2. Set temperature to `0.0`.
-3. Provide the system message:
-   ```text
-   You are an Indonesian receipt parser. Extract data accurately. Note: Periods in Indonesian prices represent thousands (e.g., 38.400 means 38400) - return them as pure numbers.
-   ```
-4. User message:
-   ```text
-   Extract from this raw text:
-
-   <receiptText>
-   ```
-5. Enforce structured JSON schema response matching `{ receipt_name: string, total_price: number, products: [{ name: string, price: number }] }`.
-
----
 
 ## 7. Identified Quirks, Legacy Bugs & Recommendations
 
@@ -1135,7 +1088,6 @@ When rebuilding the API in a new framework, address the following legacy behavio
 | **Delete Wallet** | Cascades `Transaction.destroy` with hard destroy, ignoring paranoid soft delete. | Inconsistent transaction history. | Standardize whether wallet transactions should be soft-deleted or hard-deleted. |
 | **Category Show** | `CategoryController.show` queried `where: { userId: req.params.id }`. | Route `/categories/:id` returns one category matching `userId == :id` rather than category ID. | Change query to `where: { id: req.params.id }` (and ensure user ownership). |
 | **Login Credential** | `POST /login` queries by `name` rather than `email`, yet `name` is not unique in the DB schema. | If two users share the same name, login becomes unpredictable. | Support login via `email` (which is unique) or `identifier` (name or email). |
-| **Receipt Extract HTTP Method** | Defined as `router.get("/extract")` but reads `req.body.receiptText`. | Some HTTP clients and proxies strip request bodies on GET requests. | Change endpoint method to `POST /extract`. |
 | **Change Password Auth** | `router.put("/user/change-password/:id")` did not include `authenticateToken`. | Anyone could change any user's password if they knew the user UUID. | Protect route with authentication and ensure callers can only update their own password. |
 | **Floating Point Precision** | `Wallet.balance` used `FLOAT` while `amount` used `DECIMAL`. | Floating-point drift across repeated transactions. | Use `DECIMAL(15, 2)` or integer cents across all currency fields. |
 
@@ -1166,11 +1118,10 @@ Use this checklist during and after rebuilding in the target framework:
 - [ ] Wallet deletion handles associated transactions cleanly.
 - [ ] Date parameter on transaction creation properly overrides transaction timestamp.
 
-### Analytics & AI
+### Analytics
 - [ ] `GET /analysis/spending` supports `range=month`, `range=week`, and `range=custom`.
 - [ ] Category percentages (`percentageOfTotal` and `percentageOfBudget`) calculated accurately.
 - [ ] Rolling 6-month historical totals and MoM % change calculated accurately.
-- [ ] Ollama integration working with `llama3.2:3b` returning structured JSON for receipts.
 
 ### Integration Tests
 - [ ] Auth tests: Register -> Login -> Invalidation on subsequent login.

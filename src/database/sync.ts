@@ -1,8 +1,8 @@
 import Category from "../category/Category";
-import Receipt from "../receipt/receipt";
 import Transaction from "../transaction/Transaction";
 import User from "../user/User";
 import Wallet from "../wallet/Wallet";
+import Budget from "../budget/Budget";
 
 async function sync() {
   User.hasMany(Wallet);
@@ -14,13 +14,6 @@ async function sync() {
     .catch((err) => {
       console.log("Error: " + err);
     });
-
-  Receipt.belongsTo(User);
-  await Receipt.sync()
-    .then(() => console.log("Receipt Table created successfully"))
-    .catch((err) => {
-      console.log("Error: " + err)
-    })
 
   Wallet.belongsTo(User);
   Wallet.hasMany(Transaction);
@@ -52,6 +45,12 @@ async function sync() {
     .catch((err) => {
       console.log("Error: " + err);
     });
+
+  User.hasMany(Budget);
+  Budget.belongsTo(User);
+  await Budget.sync({ alter: true })
+    .then(() => console.log("Budget Table created successfully."))
+    .catch((err) => console.log("Error: " + err));
 }
 
 export default sync;

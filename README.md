@@ -18,6 +18,9 @@ Backend API untuk aplikasi Personal Finance Tracker sebagai materi untuk pembela
 - Transactions
     - Create, Read, Update, Delete Transactions.
     - Automated Calculation.
+- Budgets
+    - Set a general amount and inclusive start/end dates.
+    - Track spending across all wallets and calculate today's remaining allowance.
 
 ## Documentation
 
