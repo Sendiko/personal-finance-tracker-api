@@ -241,6 +241,82 @@
             <p><strong>Description:</strong> Deletes a specific transaction. Replace <code>{transactionId}</code> with the actual transaction ID.</p>
             <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
+        <h2>5. Budget Endpoints</h2>
+
+        <p class="text-gray-600 mb-6">
+            Budgets are general user-level limits and are not tied to a wallet. All non-transfer expense
+            transactions across the user's wallets count toward the budget. Dates are inclusive and use
+            <code>YYYY-MM-DD</code>.
+        </p>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /budgets</h3>
+            <p><strong>Description:</strong> Retrieves all budgets for the authenticated user with current spending summaries.</p>
+            <p><strong>Summary fields:</strong> <code>totalAmount</code>, <code>spent</code>, <code>remainingAmount</code>, <code>remainingDays</code>, <code>todayBudget</code>, <code>spentToday</code>, <code>remainingToday</code>, and <code>isActive</code>.</p>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /budgets/{budgetId}</h3>
+            <p><strong>Description:</strong> Retrieves one budget and its current spending summary.</p>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /budgets/{budgetId}/today</h3>
+            <p><strong>Description:</strong> Retrieves today's allowance and spending details for a budget.</p>
+            <p><strong>Calculation:</strong> <code>todayBudget = remainingAmount / remainingDays</code>. This recalculates after spending, redistributing the remaining amount over the remaining timeline.</p>
+            <pre class="code-block">
+                {
+                    "status": 200,
+                    "message": "Today's budget sent successfully.",
+                    "summary": {
+                        "totalAmount": 3000000,
+                        "spent": 450000,
+                        "remainingAmount": 2550000,
+                        "remainingDays": 25,
+                        "todayBudget": 102000,
+                        "spentToday": 25000,
+                        "remainingToday": 77000,
+                        "isActive": true
+                    }
+                }
+            </pre>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /budgets</h3>
+            <p><strong>Description:</strong> Creates a general budget for the authenticated user.</p>
+            <p><strong>Request Body (JSON):</strong></p>
+            <pre class="code-block">
+                {
+                    "amount": 3000000,
+                    "startDate": "2026-11-01",
+                    "endDate": "2026-11-30"
+                }
+            </pre>
+            <p><strong>Validation:</strong> <code>amount</code> must be greater than zero, dates must be valid, and <code>startDate</code> cannot be after <code>endDate</code>.</p>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /budgets/{budgetId}</h3>
+            <p><strong>Description:</strong> Updates a budget. Any subset of <code>amount</code>, <code>startDate</code>, and <code>endDate</code> may be provided.</p>
+            <pre class="code-block">
+                {
+                    "amount": 3500000,
+                    "endDate": "2026-12-05"
+                }
+            </pre>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-delete">DELETE</span> /budgets/{budgetId}</h3>
+            <p><strong>Description:</strong> Deletes a budget.</p>
+            <p><strong>Authentication:</strong> ******</p>
+        </div>
     </div>
 </body>
 </html>
