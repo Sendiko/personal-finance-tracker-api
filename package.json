@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon index.ts",
-    "db:migrate": "node dist/src/database/cli.js migrate",
-    "db:reset": "node dist/src/database/cli.js reset",
-    "db:seed": "node dist/src/database/cli.js seed",
-    "db:setup": "npm run db:migrate && npm run db:seed"
+    "build": "bunx tsc",
+    "start": "bun dist/index.js",
+    "dev": "bun --watch index.ts",
+    "db:migrate": "bun dist/src/database/cli.js migrate",
+    "db:reset": "bun dist/src/database/cli.js reset",
+    "db:seed": "bun dist/src/database/cli.js seed",
+    "db:setup": "bun run db:migrate && bun run db:seed"
   },
   "keywords": [],
   "author": "",
@@ -41,5 +41,9 @@
   "allowScripts": {
     "bcrypt@6.0.0": true,
     "sqlite3@6.0.1": true
-  }
+  },
+  "trustedDependencies": [
+    "bcrypt",
+    "sqlite3"
+  ]
 }

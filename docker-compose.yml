@@ -33,7 +33,7 @@ services:
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set in .env}
     ports:
       - "${APP_PORT:-3000}:3000"
-    command: ["sh", "-c", "npm run db:migrate && npm start"]
+    command: ["sh", "-c", "bun run db:migrate && bun run start"]
 
 volumes:
   mysql_data:

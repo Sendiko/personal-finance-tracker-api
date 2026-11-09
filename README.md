@@ -4,7 +4,7 @@ Backend API untuk aplikasi Personal Finance Tracker.
 
 ## Production deployment with Docker Compose
 
-Requirements: Docker Engine and Docker Compose v2.
+Requirements: Docker Engine and Docker Compose v2. Bun 1.x is required for local commands and on the remote deployment host.
 
 1. Copy the environment template and set production-safe values:
 
@@ -47,8 +47,8 @@ Requirements: Docker Engine and Docker Compose v2.
 Install dependencies and compile the TypeScript code before running database commands:
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 ```
 
 Configure `CORS_ORIGIN`, `DB_NAME`, `DB_USER`, `DB_PASS`, and `DB_HOST` in `.env`, then use:
@@ -57,17 +57,17 @@ For local frontend development, set `CORS_ORIGIN=http://localhost:3000`.
 
 | Command | Purpose |
 | --- | --- |
-| `npm run db:migrate` | Creates or alters tables to match the Sequelize models. Safe for normal deployments. |
-| `npm run db:seed` | Creates an idempotent demo user, categories, and wallet. Set `SEED_EMAIL`, `SEED_PASSWORD`, and `SEED_NAME` first. Use only for development or staging. |
-| `npm run db:setup` | Runs migration followed by the demo seed. |
-| `npm run db:reset` | Drops all tables and recreates an empty schema. **Destructive: all data is deleted.** |
+| `bun run db:migrate` | Creates or alters tables to match the Sequelize models. Safe for normal deployments. |
+| `bun run db:seed` | Creates an idempotent demo user, categories, and wallet. Set `SEED_EMAIL`, `SEED_PASSWORD`, and `SEED_NAME` first. Use only for development or staging. |
+| `bun run db:setup` | Runs migration followed by the demo seed. |
+| `bun run db:reset` | Drops all tables and recreates an empty schema. **Destructive: all data is deleted.** |
 
 For a Compose deployment, run lifecycle commands inside the API container:
 
 ```bash
-docker compose exec api npm run db:migrate
-docker compose exec api npm run db:seed
-docker compose exec api npm run db:reset
+docker compose exec api bun run db:migrate
+docker compose exec api bun run db:seed
+docker compose exec api bun run db:reset
 ```
 
 Run `db:reset` only after confirming that the database volume can be discarded. The API also synchronizes the schema during startup, but `db:migrate` is provided for an explicit deployment step.
