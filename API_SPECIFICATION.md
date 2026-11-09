@@ -901,7 +901,8 @@ Budgets are general user-level limits and are not linked to a wallet. Every expe
 
 #### 3. Get Today's Budget
 
-- **Route:** `GET /budgets/:id/today`
+- **Route:** `GET /budgets/today`
+- Finds the authenticated user's budget whose inclusive date range contains today and returns the `summary` object only. If multiple budgets overlap today, the one with the latest `startDate` is used.
 - `todayBudget` is the remaining budget divided evenly across the remaining days, including today. This recalculates after spending, so an exhausted day automatically redistributes the remaining amount across the remaining timeline.
 
 #### 4. Create a Budget

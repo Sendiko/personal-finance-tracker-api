@@ -153,8 +153,18 @@ const BudgetController = {
   today: async (req: Request, res: Response) => {
     try {
       const userId = await getAuthenticatedUserId(req);
+      if (!userId) {
+        return res.status(401).json({ status: 401, message: "Unauthorized." });
+      }
+
+      const today = getToday();
       const budget = await Budget.findOne({
-        where: { id: req.params.id, userId: userId || "" },
+        where: {
+          userId,
+          startDate: { [Op.lte]: today },
+          endDate: { [Op.gte]: today },
+        },
+        order: [["startDate", "DESC"]],
       });
       if (!budget) {
         return res.status(404).json({ status: 404, message: "Budget not found." });
@@ -163,8 +173,7 @@ const BudgetController = {
       return res.status(200).json({
         status: 200,
         message: "Today's budget sent successfully.",
-        budget: budget.toJSON(),
-        summary: await getBudgetSummary(budget),
+        summary: await getBudgetSummary(budget, today),
       });
     } catch (error: any) {
       return res.status(500).json({ status: 500, message: "Server error.", error: error.message });

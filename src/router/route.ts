@@ -45,7 +45,7 @@ router.delete(
 );
 
 router.get("/budgets", authenticateToken, BudgetController.index);
-router.get("/budgets/:id/today", authenticateToken, BudgetController.today);
+router.get("/budgets/today", authenticateToken, BudgetController.today);
 router.get("/budgets/:id", authenticateToken, BudgetController.show);
 router.post("/budgets", authenticateToken, BudgetController.store);
 router.put("/budgets/:id", authenticateToken, BudgetController.update);

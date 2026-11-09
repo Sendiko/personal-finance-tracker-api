@@ -263,8 +263,8 @@
         </div>
 
         <div class="endpoint-section">
-            <h3><span class="method-tag method-get">GET</span> /budgets/{budgetId}/today</h3>
-            <p><strong>Description:</strong> Retrieves today's allowance and spending details for a budget.</p>
+            <h3><span class="method-tag method-get">GET</span> /budgets/today</h3>
+            <p><strong>Description:</strong> Finds the authenticated user's budget whose inclusive date range contains today and returns today's allowance and spending summary.</p>
             <p><strong>Calculation:</strong> <code>todayBudget = remainingAmount / remainingDays</code>. This recalculates after spending, redistributing the remaining amount over the remaining timeline.</p>
             <pre class="code-block">
                 {
