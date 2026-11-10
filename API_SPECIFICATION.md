@@ -744,6 +744,10 @@ Returns all categories belonging to the authenticated user, including their asso
 #### 1. List Transactions
 Lists all transactions created by the authenticated user, joined with their Category and Wallet details.
 
+Optional query parameters: `startDate` and `endDate` filter the inclusive `createdAt` date range, while `type` filters by `income` or `expense`. Repeat `type` or provide comma-separated values to include both types. Dates must be valid, and `startDate` cannot be after `endDate`.
+
+Examples: `GET /transactions?startDate=2026-11-01&endDate=2026-11-30&type=expense` or `GET /transactions?type=income&type=expense`.
+
 - **Route:** `GET /transactions`
 - **Auth:** Bearer Token
 - **Success Response (200 OK):**

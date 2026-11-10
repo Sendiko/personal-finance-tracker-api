@@ -201,8 +201,9 @@
         <h2>4. Transaction Endpoints</h2>
 
         <div class="endpoint-section">
-            <h3><span class="method-tag method-get">GET</span> /transactions/{userId}</h3>
-            <p><strong>Description:</strong> Retrieves all transactions for a specific user. Replace <code>{userId}</code> with the actual user ID.</p>
+            <h3><span class="method-tag method-get">GET</span> /transactions</h3>
+            <p><strong>Description:</strong> Retrieves the authenticated user's transactions. Optional query parameters: <code>startDate</code>, <code>endDate</code>, and <code>type</code> (<code>income</code> or <code>expense</code>).</p>
+            <p><strong>Examples:</strong> <code>/transactions?startDate=2026-11-01&amp;endDate=2026-11-30&amp;type=expense</code> or <code>/transactions?type=income&amp;type=expense</code></p>
             <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 

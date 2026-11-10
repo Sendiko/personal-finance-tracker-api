@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Op } from "sequelize";
 import Transaction from "./Transaction";
 import Wallet from "../wallet/Wallet";
 import Category from "../category/Category";
@@ -10,14 +11,83 @@ const TransactionController = {
       // @ts-ignore User comes from middleware
       const userName = req.user;
       const user = await User.findOne({ where: { name: userName.name } });
-      const transactions = await Transaction.findAll(
-        {
-          where: { userId: user?.dataValues.id },
-          include: [
-            Wallet, Category
-          ]
+
+      if (!user) {
+        return res.status(404).json({
+          status: 404,
+          message: "User not found.",
+        });
+      }
+
+      const startDate = req.query.startDate as string | undefined;
+      const endDate = req.query.endDate as string | undefined;
+      const dateFilter: { [Op.gte]?: Date; [Op.lte]?: Date } = {};
+
+      if (startDate) {
+        const startDateObj = new Date(startDate);
+        startDateObj.setHours(0, 0, 0, 0);
+        if (Number.isNaN(startDateObj.getTime())) {
+          return res.status(400).json({
+            status: 400,
+            message: "Invalid startDate. Use a valid date.",
+          });
         }
-      );;
+        dateFilter[Op.gte] = startDateObj;
+      }
+
+      if (endDate) {
+        const endDateObj = new Date(endDate);
+        endDateObj.setHours(23, 59, 59, 999);
+        if (Number.isNaN(endDateObj.getTime())) {
+          return res.status(400).json({
+            status: 400,
+            message: "Invalid endDate. Use a valid date.",
+          });
+        }
+        dateFilter[Op.lte] = endDateObj;
+      }
+
+      const startBoundary = dateFilter[Op.gte];
+      const endBoundary = dateFilter[Op.lte];
+      if (startBoundary && endBoundary && startBoundary.getTime() > endBoundary.getTime()) {
+        return res.status(400).json({
+          status: 400,
+          message: "startDate cannot be after endDate.",
+        });
+      }
+
+      const requestedTypes = req.query.type
+        ? (Array.isArray(req.query.type) ? req.query.type : [req.query.type])
+            .flatMap((value) => String(value).split(","))
+        : [];
+      const allowedTypes = ["income", "expense"];
+      const invalidType = requestedTypes.find((type) => !allowedTypes.includes(type));
+
+      if (invalidType) {
+        return res.status(400).json({
+          status: 400,
+          message: "Invalid type. Allowed values are income and expense.",
+        });
+      }
+
+      const where: Record<string | symbol, unknown> = {
+        userId: user.dataValues.id,
+      };
+
+      if (startDate || endDate) {
+        where.createdAt = dateFilter;
+      }
+
+      if (requestedTypes.length > 0) {
+        where.type = requestedTypes.length === 1
+          ? requestedTypes[0]
+          : { [Op.in]: requestedTypes };
+      }
+
+      const transactions = await Transaction.findAll({
+        where,
+        include: [Wallet, Category],
+      });
 
       return res.status(200).json({
         status: 200,
