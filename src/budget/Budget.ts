@@ -32,6 +32,14 @@ const Budget = db.define("budget", {
       key: "id",
     },
   },
+  walletId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: "wallets",
+      key: "id",
+    },
+  },
 });
 
 export default Budget;

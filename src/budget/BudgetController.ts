@@ -3,6 +3,7 @@ import { Op } from "sequelize";
 import Budget from "./Budget";
 import Transaction from "../transaction/Transaction";
 import User from "../user/User";
+import Wallet from "../wallet/Wallet";
 
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -65,6 +66,9 @@ async function getBudgetSummary(budget: any, today = getToday()) {
         : periodEnd,
     },
   };
+  if (budget.walletId) {
+    spentWhere.walletId = budget.walletId;
+  }
   const periodTransactions = summaryEnd
     ? await Transaction.findAll({ where: spentWhere })
     : [];
@@ -190,7 +194,7 @@ const BudgetController = {
 
   store: async (req: Request, res: Response) => {
     try {
-      const { amount, startDate, endDate } = req.body;
+      const { amount, startDate, endDate, walletId } = req.body;
       const numericAmount = Number(amount);
       if (
         !Number.isFinite(numericAmount) ||
@@ -210,7 +214,20 @@ const BudgetController = {
         return res.status(401).json({ status: 401, message: "Unauthorized." });
       }
 
-      const budget = await Budget.create({ amount: numericAmount, startDate, endDate, userId });
+      if (walletId !== undefined && walletId !== null) {
+        const wallet = await Wallet.findOne({ where: { id: walletId, userId } });
+        if (!wallet) {
+          return res.status(400).json({ status: 400, message: "Wallet not found for this user." });
+        }
+      }
+
+      const budget = await Budget.create({
+        amount: numericAmount,
+        startDate,
+        endDate,
+        userId,
+        walletId: walletId ?? null,
+      });
       return res.status(201).json({
         status: 201,
         message: "Budget registered successfully.",
@@ -233,6 +250,7 @@ const BudgetController = {
       const amount = req.body.amount === undefined ? currentBudget.amount : Number(req.body.amount);
       const startDate = req.body.startDate || currentBudget.startDate;
       const endDate = req.body.endDate || currentBudget.endDate;
+      const walletId = req.body.walletId === undefined ? currentBudget.walletId : req.body.walletId;
       if (
         !Number.isFinite(amount) ||
         amount <= 0 ||
@@ -243,7 +261,14 @@ const BudgetController = {
         return res.status(400).json({ status: 400, message: "Invalid budget amount or dates." });
       }
 
-      await budget.update({ amount, startDate, endDate });
+      if (walletId !== undefined && walletId !== null) {
+        const wallet = await Wallet.findOne({ where: { id: walletId, userId } });
+        if (!wallet) {
+          return res.status(400).json({ status: 400, message: "Wallet not found for this user." });
+        }
+      }
+
+      await budget.update({ amount, startDate, endDate, walletId: walletId ?? null });
       return res.status(200).json({
         status: 200,
         message: "Budget updated successfully.",

@@ -27,7 +27,9 @@ async function sync(options: { alter?: boolean } = { alter: true }) {
   console.log("Transaction Table created successfully.");
 
   User.hasMany(Budget);
+  Wallet.hasMany(Budget);
   Budget.belongsTo(User);
+  Budget.belongsTo(Wallet);
   await Budget.sync(options);
   console.log("Budget Table created successfully.");
 }

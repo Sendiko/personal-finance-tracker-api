@@ -195,6 +195,7 @@ Stores a general user budget independent of wallets. Expense transactions are ma
 | :--- | :--- | :--- | :--- | :--- |
 | `id` | UUID (v4) | `PRIMARY KEY` | Auto UUID v4 | Unique identifier |
 | `userId` | UUID (v4) | `NOT NULL, FK -> users(id)` | None | Budget owner |
+| `walletId` | UUID (v4) | `NULLABLE, FK -> wallets(id)` | `NULL` | Optional wallet scope; `NULL` includes all user wallets |
 | `amount` | DECIMAL(15, 2) | `NOT NULL` | None | Total budget for the inclusive date range |
 | `startDate` | DATE | `NOT NULL` | None | First day covered, `YYYY-MM-DD` |
 | `endDate` | DATE | `NOT NULL` | None | Last day covered, `YYYY-MM-DD` |
@@ -892,7 +893,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
 
 ### Budget Management
 
-Budgets are general user-level limits and are not linked to a wallet. Every expense transaction owned by the user, regardless of wallet, counts toward the budget. Dates are inclusive and use `YYYY-MM-DD`.
+Budgets can be general user-level limits or linked to one wallet. A wallet-linked budget only counts expense transactions from that wallet. For backward compatibility, a budget with a `NULL` `walletId` counts expense transactions from every wallet owned by the user. Dates are inclusive and use `YYYY-MM-DD`.
 
 #### 1. List Budgets
 
@@ -912,13 +913,14 @@ Budgets are general user-level limits and are not linked to a wallet. Every expe
 #### 4. Create a Budget
 
 - **Route:** `POST /budgets`
-- **Request body:** `{ "amount": 1000, "startDate": "2026-11-01", "endDate": "2026-11-30" }`
+- **Request body:** `{ "amount": 1000, "startDate": "2026-11-01", "endDate": "2026-11-30", "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9" }`
 - `amount` must be greater than zero and `startDate` cannot be after `endDate`.
+- `walletId` is optional. When provided, it must belong to the authenticated user and only that wallet's expense transactions count toward the budget. Omit it (or send `null`) for a budget covering all of the user's wallets.
 
 #### 5. Update a Budget
 
 - **Route:** `PUT /budgets/:id`
-- Accepts any subset of `amount`, `startDate`, and `endDate`.
+- Accepts any subset of `amount`, `startDate`, `endDate`, and `walletId`. Set `walletId` to `null` to remove wallet scoping.
 
 #### 6. Delete a Budget
 
