@@ -93,6 +93,12 @@ async function getBudgetSummary(budget: any, today = getToday()) {
   const remainingAmount = Math.max(amount - spent, 0);
   const remainingDays = todayInBudget ? getDaysBetween(today, endDate) : 0;
   const dailyBudget = remainingDays > 0 ? remainingAmount / remainingDays : 0;
+  const dailyPercentageUsed = dailyBudget > 0
+    ? Math.min(Math.round((spentToday / dailyBudget) * 100), 100)
+    : 0;
+  const totalPercentageUsed = amount > 0
+    ? Math.min(Math.round((spent / amount) * 100), 100)
+    : 0;
 
   return {
     totalAmount: amount,
@@ -102,6 +108,8 @@ async function getBudgetSummary(budget: any, today = getToday()) {
     todayBudget: todayInBudget ? dailyBudget : 0,
     spentToday,
     remainingToday: todayInBudget ? Math.max(dailyBudget - spentToday, 0) : 0,
+    dailyPercentageUsed,
+    totalPercentageUsed,
     isActive: todayInBudget,
   };
 }

@@ -253,7 +253,7 @@
         <div class="endpoint-section">
             <h3><span class="method-tag method-get">GET</span> /budgets</h3>
             <p><strong>Description:</strong> Retrieves all budgets for the authenticated user with current spending summaries.</p>
-            <p><strong>Summary fields:</strong> <code>totalAmount</code>, <code>spent</code>, <code>remainingAmount</code>, <code>remainingDays</code>, <code>todayBudget</code>, <code>spentToday</code>, <code>remainingToday</code>, and <code>isActive</code>.</p>
+            <p><strong>Summary fields:</strong> <code>totalAmount</code>, <code>spent</code>, <code>remainingAmount</code>, <code>remainingDays</code>, <code>todayBudget</code>, <code>spentToday</code>, <code>remainingToday</code>, <code>dailyPercentageUsed</code>, <code>totalPercentageUsed</code>, and <code>isActive</code>. Percentage fields are rounded integers from <code>0</code> to <code>100</code>.</p>
             <p><strong>Authentication:</strong> ******</p>
         </div>
 
@@ -279,6 +279,8 @@
                         "todayBudget": 102000,
                         "spentToday": 25000,
                         "remainingToday": 77000,
+                        "dailyPercentageUsed": 24,
+                        "totalPercentageUsed": 15,
                         "isActive": true
                     }
                 }

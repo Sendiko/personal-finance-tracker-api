@@ -897,7 +897,7 @@ Budgets are general user-level limits and are not linked to a wallet. Every expe
 #### 1. List Budgets
 
 - **Route:** `GET /budgets`
-- Returns each budget with a `summary` containing `totalAmount`, `spent`, `remainingAmount`, `remainingDays`, `todayBudget`, `spentToday`, `remainingToday`, and `isActive`.
+- Returns each budget with a `summary` containing `totalAmount`, `spent`, `remainingAmount`, `remainingDays`, `todayBudget`, `spentToday`, `remainingToday`, `dailyPercentageUsed`, `totalPercentageUsed`, and `isActive`. The percentage fields are rounded integers from `0` to `100`.
 
 #### 2. Get a Budget
 
