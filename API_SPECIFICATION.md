@@ -19,6 +19,7 @@
    - [Wallet Management](#wallet-management)
    - [Category Management](#category-management)
    - [Transaction Management](#transaction-management)
+   - [Transfer Management](#transfer-management)
    - [Budget Management](#budget-management)
    - [Spending Analysis Engine](#spending-analysis-engine)
 6. [Core Business Logic & State Machines](#6-core-business-logic--state-machines)
@@ -188,7 +189,23 @@ Records financial movement. Configured with **paranoid soft delete**.
 
 ---
 
-#### 5. `budgets` Table
+#### 5. `transfers` Table
+Records money moved between two wallets. Transfers are not transactions and do not affect spending analysis or budgets.
+
+| Column | Type | Constraints | Default | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | UUID (v4) | `PRIMARY KEY` | Auto UUID v4 | Unique identifier |
+| `userId` | UUID (v4) | `NOT NULL, FK -> users(id)` | None | Transfer owner |
+| `sourceWalletId` | UUID (v4) | `NOT NULL, FK -> wallets(id)` | None | Wallet debited |
+| `destinationWalletId` | UUID (v4) | `NOT NULL, FK -> wallets(id)` | None | Wallet credited |
+| `amount` | DECIMAL(15, 2) | `NOT NULL` | None | Positive transfer amount |
+| `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Effective transfer date |
+| `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last modified timestamp |
+| `deletedAt` | TIMESTAMP | `NULLABLE` | `NULL` | Soft delete timestamp |
+
+---
+
+#### 6. `budgets` Table
 Stores a general user budget independent of wallets. Expense transactions are matched by `userId` and their effective `createdAt` date.
 
 | Column | Type | Constraints | Default | Notes |
@@ -762,7 +779,6 @@ Examples: `GET /transactions?startDate=2026-11-01&endDate=2026-11-30&type=expens
         "name": "Supermarket Groceries",
         "amount": 245000,
         "type": "expense",
-        "isTransfer": false,
         "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
         "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
         "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",
@@ -812,7 +828,6 @@ Creates a transaction and immediately syncs the associated wallet's balance.
     "name": "Lunch at Warung Padang",
     "amount": 35000,
     "type": "expense",
-    "isTransfer": false,
     "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
     "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
     "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",
@@ -824,7 +839,6 @@ Creates a transaction and immediately syncs the associated wallet's balance.
   | `name` | string | Yes | Description / title |
   | `amount` | decimal | Yes | Absolute transaction amount |
   | `type` | enum | Yes | `'income'` or `'expense'` |
-  | `isTransfer` | boolean | No | Set to `true` for a transfer between wallets. Transfer transactions are excluded from expense/income statistics and analysis. Defaults to `false`. |
   | `categoryId`| UUID | Yes | Foreign key to `categories` |
   | `walletId` | UUID | Yes | Foreign key to `wallets` |
   | `userId` | UUID | Yes | Owner foreign key to `users` |
@@ -845,7 +859,6 @@ Creates a transaction and immediately syncs the associated wallet's balance.
       "name": "Lunch at Warung Padang",
       "amount": 35000,
       "type": "expense",
-      "isTransfer": false,
       "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
       "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
       "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4",
@@ -888,6 +901,36 @@ Creates a transaction and immediately syncs the associated wallet's balance.
     "message": "Transaction deleted successfully."
   }
   ```
+
+---
+
+### Transfer Management
+
+Transfers move money between two wallets without creating income or expense transactions.
+
+#### 1. List Transfers
+- **Route:** `GET /transfers`
+- **Auth:** Bearer Token
+
+#### 2. Get a Transfer
+- **Route:** `GET /transfers/:id`
+- **Auth:** Bearer Token
+
+#### 3. Create a Transfer
+- **Route:** `POST /transfers`
+- **Auth:** Bearer Token
+- **Request Body:** `{ "amount": 50000, "sourceWalletId": "source-wallet-id", "destinationWalletId": "destination-wallet-id", "date": "2026-09-27T12:30:00.000Z" }`
+- The source wallet is debited and destination wallet credited atomically.
+
+#### 4. Update a Transfer
+- **Route:** `PUT /transfers/:id`
+- **Auth:** Bearer Token
+- Reverses the previous balance changes and applies the updated transfer atomically.
+
+#### 5. Delete a Transfer
+- **Route:** `DELETE /transfers/:id`
+- **Auth:** Bearer Token
+- Soft-deletes the transfer and reverses its wallet balance changes atomically.
 
 ---
 

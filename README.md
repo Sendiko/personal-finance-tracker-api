@@ -97,6 +97,7 @@ Run `db:reset` only after confirming that the database volume can be discarded. 
 - User authentication with JWT and user statistics.
 - Wallet and category management.
 - Transaction CRUD with automated wallet balance updates.
+- Transfer CRUD for moving money atomically between wallets.
 - Budget tracking and spending analysis.
 
 ## Documentation

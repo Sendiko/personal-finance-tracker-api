@@ -58,7 +58,6 @@ async function getBudgetSummary(budget: any, today = getToday()) {
   const spentWhere: any = {
     userId: budget.userId,
     type: "expense",
-    isTransfer: false,
     createdAt: {
       [Op.gte]: periodStart,
       [Op.lt]: summaryEnd

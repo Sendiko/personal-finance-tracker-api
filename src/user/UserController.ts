@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 import config from "../config/config";
 import Wallet from "../wallet/Wallet";
 import Transaction from "../transaction/Transaction";
-import { Op } from "sequelize";
 
 const UserController = {
   getByEmail: async (req: Request, res: Response) => {
@@ -284,9 +283,6 @@ const UserController = {
         // @ts-ignore: User has id
         where: {
           userId: user.dataValues.id,
-          isTransfer: {
-            [Op.not]: true,
-          },
         },
       })
 

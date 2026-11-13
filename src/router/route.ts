@@ -7,6 +7,7 @@ import TransactionController from "../transaction/TransactionController";
 import AnalysisController from "../analysis/AnalysisController";
 import authenticateToken from "../middleware/authMiddleware";
 import BudgetController from "../budget/BudgetController";
+import TransferController from "../transfer/TransferController";
 
 const router = express.Router();
 
@@ -43,6 +44,12 @@ router.delete(
   authenticateToken,
   TransactionController.delete
 );
+
+router.get("/transfers", authenticateToken, TransferController.index);
+router.get("/transfers/:id", authenticateToken, TransferController.show);
+router.post("/transfers", authenticateToken, TransferController.store);
+router.put("/transfers/:id", authenticateToken, TransferController.update);
+router.delete("/transfers/:id", authenticateToken, TransferController.delete);
 
 router.get("/budgets", authenticateToken, BudgetController.index);
 router.get("/budgets/today", authenticateToken, BudgetController.today);

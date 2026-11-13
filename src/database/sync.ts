@@ -3,6 +3,7 @@ import Transaction from "../transaction/Transaction";
 import User from "../user/User";
 import Wallet from "../wallet/Wallet";
 import Budget from "../budget/Budget";
+import Transfer from "../transfer/Transfer";
 
 async function sync(options: { alter?: boolean } = { alter: true }) {
   User.hasMany(Wallet);
@@ -25,6 +26,15 @@ async function sync(options: { alter?: boolean } = { alter: true }) {
   Transaction.belongsTo(Wallet);
   await Transaction.sync(options);
   console.log("Transaction Table created successfully.");
+
+  User.hasMany(Transfer);
+  Wallet.hasMany(Transfer, { foreignKey: "sourceWalletId", as: "outgoingTransfers" });
+  Wallet.hasMany(Transfer, { foreignKey: "destinationWalletId", as: "incomingTransfers" });
+  Transfer.belongsTo(User);
+  Transfer.belongsTo(Wallet, { foreignKey: "sourceWalletId", as: "sourceWallet" });
+  Transfer.belongsTo(Wallet, { foreignKey: "destinationWalletId", as: "destinationWallet" });
+  await Transfer.sync(options);
+  console.log("Transfer Table created successfully.");
 
   User.hasMany(Budget);
   Wallet.hasMany(Budget);

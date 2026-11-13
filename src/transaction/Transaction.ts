@@ -24,11 +24,6 @@ const Transaction = db.define("transaction", {
     type: DataTypes.ENUM("income", "expense"),
     allowNull: false,
   },
-  isTransfer: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
   categoryId: {
     type: DataTypes.UUID,
     allowNull: false,

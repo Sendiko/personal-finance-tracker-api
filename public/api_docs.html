@@ -216,7 +216,6 @@
                     "name": "Luch at KFC",
                     "amount": 50000,
                     "type": "expense",
-                    "isTransfer": false,
                     "categoryId": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
                     "walletId": "afc42d8c-c3e1-43a1-aaff-0b01d1458bc9",
                     "userId": "6ac6b327-47c0-4e8a-adbb-4c1b075f162c"
@@ -242,10 +241,37 @@
             <p><strong>Description:</strong> Deletes a specific transaction. Replace <code>{transactionId}</code> with the actual transaction ID.</p>
             <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
-        <h2>5. Budget Endpoints</h2>
+        <h2>5. Transfer Endpoints</h2>
+        <p class="text-gray-600 mb-6">Transfers move money between wallets without creating income or expense transactions. Wallet balances are updated atomically.</p>
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /transfers</h3>
+            <p><strong>Description:</strong> Retrieves transfers for the authenticated user.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-post">POST</span> /transfers</h3>
+            <p><strong>Description:</strong> Creates a transfer between two wallets and updates both balances.</p>
+            <pre class="code-block">{
+    "amount": 50000,
+    "sourceWalletId": "source-wallet-id",
+    "destinationWalletId": "destination-wallet-id"
+}</pre>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-put">PUT</span> /transfers/{transferId}</h3>
+            <p><strong>Description:</strong> Updates a transfer and recalculates both wallet balances.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-delete">DELETE</span> /transfers/{transferId}</h3>
+            <p><strong>Description:</strong> Deletes a transfer and reverses its balance changes.</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+        </div>
+        <h2>6. Budget Endpoints</h2>
 
         <p class="text-gray-600 mb-6">
-            Budgets are general user-level limits and are not tied to a wallet. All non-transfer expense
+            Budgets are general user-level limits and are not tied to a wallet. All expense
             transactions across the user's wallets count toward the budget. Dates are inclusive and use
             <code>YYYY-MM-DD</code>.
         </p>
