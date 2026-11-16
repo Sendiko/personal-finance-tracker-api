@@ -242,7 +242,7 @@
             <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
         <h2>5. Transfer Endpoints</h2>
-        <p class="text-gray-600 mb-6">Transfers move money between wallets without creating income or expense transactions. Wallet balances are updated atomically.</p>
+        <p class="text-gray-600 mb-6">Transfers create a linked expense transaction and income transaction with <code>isTransfer: true</code>. Wallet balances are updated atomically.</p>
         <div class="endpoint-section">
             <h3><span class="method-tag method-get">GET</span> /transfers</h3>
             <p><strong>Description:</strong> Retrieves transfers for the authenticated user.</p>
@@ -254,7 +254,8 @@
             <pre class="code-block">{
     "amount": 50000,
     "sourceWalletId": "source-wallet-id",
-    "destinationWalletId": "destination-wallet-id"
+    "destinationWalletId": "destination-wallet-id",
+    "categoryId": "category-id"
 }</pre>
             <p><strong>Authentication:</strong> Bearer Token</p>
         </div>

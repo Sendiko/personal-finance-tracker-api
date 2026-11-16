@@ -183,29 +183,15 @@ Records financial movement. Configured with **paranoid soft delete**.
 | `name` | VARCHAR(255) | `NOT NULL` | None | Title/merchant/description |
 | `amount` | DECIMAL(15, 2) | `NOT NULL` | None | Absolute positive numeric value |
 | `type` | ENUM | `NOT NULL` | None | Allowed values: `'income'`, `'expense'` |
+| `isTransfer` | BOOLEAN | `NOT NULL` | `false` | Marks one side of a wallet transfer |
+| `transferId` | UUID (v4) | `NULLABLE` | `NULL` | Shared by the two transactions in a transfer |
 | `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Effective transaction date *(can be set manually on creation)* |
 | `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last modified timestamp |
 | `deletedAt` | TIMESTAMP | `NULLABLE` | `NULL` | Soft delete timestamp (`paranoid: true`) |
 
 ---
 
-#### 5. `transfers` Table
-Records money moved between two wallets. Transfers are not transactions and do not affect spending analysis or budgets.
-
-| Column | Type | Constraints | Default | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| `id` | UUID (v4) | `PRIMARY KEY` | Auto UUID v4 | Unique identifier |
-| `userId` | UUID (v4) | `NOT NULL, FK -> users(id)` | None | Transfer owner |
-| `sourceWalletId` | UUID (v4) | `NOT NULL, FK -> wallets(id)` | None | Wallet debited |
-| `destinationWalletId` | UUID (v4) | `NOT NULL, FK -> wallets(id)` | None | Wallet credited |
-| `amount` | DECIMAL(15, 2) | `NOT NULL` | None | Positive transfer amount |
-| `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Effective transfer date |
-| `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last modified timestamp |
-| `deletedAt` | TIMESTAMP | `NULLABLE` | `NULL` | Soft delete timestamp |
-
----
-
-#### 6. `budgets` Table
+#### 5. `budgets` Table
 Stores a general user budget independent of wallets. Expense transactions are matched by `userId` and their effective `createdAt` date.
 
 | Column | Type | Constraints | Default | Notes |
@@ -839,6 +825,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
   | `name` | string | Yes | Description / title |
   | `amount` | decimal | Yes | Absolute transaction amount |
   | `type` | enum | Yes | `'income'` or `'expense'` |
+  | `isTransfer` | boolean | No | Marks a transaction as part of a wallet transfer. Defaults to `false`. |
   | `categoryId`| UUID | Yes | Foreign key to `categories` |
   | `walletId` | UUID | Yes | Foreign key to `wallets` |
   | `userId` | UUID | Yes | Owner foreign key to `users` |
@@ -906,7 +893,7 @@ Creates a transaction and immediately syncs the associated wallet's balance.
 
 ### Transfer Management
 
-Transfers move money between two wallets without creating income or expense transactions.
+Transfers move money between two wallets as a linked expense transaction and income transaction. Both rows have `isTransfer: true` and share a `transferId`.
 
 #### 1. List Transfers
 - **Route:** `GET /transfers`
@@ -919,7 +906,7 @@ Transfers move money between two wallets without creating income or expense tran
 #### 3. Create a Transfer
 - **Route:** `POST /transfers`
 - **Auth:** Bearer Token
-- **Request Body:** `{ "amount": 50000, "sourceWalletId": "source-wallet-id", "destinationWalletId": "destination-wallet-id", "date": "2026-09-27T12:30:00.000Z" }`
+- **Request Body:** `{ "amount": 50000, "sourceWalletId": "source-wallet-id", "destinationWalletId": "destination-wallet-id", "categoryId": "category-id", "date": "2026-09-27T12:30:00.000Z" }`
 - The source wallet is debited and destination wallet credited atomically.
 
 #### 4. Update a Transfer

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Op } from "sequelize";
 import User from "./User";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -283,6 +284,9 @@ const UserController = {
         // @ts-ignore: User has id
         where: {
           userId: user.dataValues.id,
+          isTransfer: {
+            [Op.not]: true,
+          },
         },
       })
 
