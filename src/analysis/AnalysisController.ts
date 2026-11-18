@@ -80,7 +80,7 @@ const AnalysisController = {
           id: cat.dataValues.id,
           name: cat.dataValues.name,
           color: cat.dataValues.color || "#3B82F6",
-          icon: cat.dataValues.icon || "folder",
+          icon: cat.dataValues.icon || "category",
           amount: 0,
           budget: parseFloat(cat.dataValues.budget || 0),
           percentageOfTotal: 0,
@@ -106,7 +106,7 @@ const AnalysisController = {
             // @ts-ignore
             color: tx.category?.color || "#9CA3AF",
             // @ts-ignore
-            icon: tx.category?.icon || "folder",
+            icon: tx.category?.icon || "category",
             amount: amount,
             // @ts-ignore
             budget: parseFloat(tx.category?.budget || 0),

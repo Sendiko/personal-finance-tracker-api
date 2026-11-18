@@ -2,6 +2,49 @@ import db from "../config/db";
 import { DataTypes } from "sequelize";
 import { UUIDV4 } from "sequelize";
 
+export const CATEGORY_ICON_KEYS = [
+  "restaurant",
+  "local_cafe",
+  "local_bar",
+  "fastfood",
+  "shopping_cart",
+  "directions_car",
+  "directions_bus",
+  "local_taxi",
+  "flight",
+  "two_wheeler",
+  "home",
+  "bolt",
+  "water_drop",
+  "wifi",
+  "phone_android",
+  "build",
+  "shopping_bag",
+  "devices",
+  "chair",
+  "card_giftcard",
+  "pets",
+  "medical_services",
+  "medication",
+  "fitness_center",
+  "spa",
+  "movie",
+  "sports_esports",
+  "music_note",
+  "luggage",
+  "school",
+  "child_care",
+  "payments",
+  "work",
+  "trending_up",
+  "savings",
+  "account_balance",
+  "credit_card",
+  "redeem",
+  "swap_horiz",
+  "category",
+];
+
 const Category = db.define("category", {
   id: {
     type: DataTypes.UUID,
@@ -37,7 +80,10 @@ const Category = db.define("category", {
   icon: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: "folder",
+    defaultValue: "category",
+    validate: {
+      isIn: [CATEGORY_ICON_KEYS],
+    },
   },
 });
 

@@ -165,7 +165,7 @@ User-defined transaction categories with budgeting thresholds.
 | `name` | VARCHAR(255) | `NOT NULL` | None | e.g., "Food & Beverage", "Utilities" |
 | `budget` | DECIMAL(15, 2) | `NULLABLE` | `0.00` | Target spending limit per month |
 | `color` | VARCHAR(32) | `NULLABLE` | `"#3B82F6"` | Hex color code for UI charts/badges |
-| `icon` | VARCHAR(64) | `NULLABLE` | `"folder"` | Icon identifier (e.g. Material/FontAwesome name) |
+| `icon` | VARCHAR(64) | `NULLABLE, must be one of the supported icon keys` | `"category"` | Material icon key |
 | `createdAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Creation timestamp |
 | `updatedAt` | TIMESTAMP | `NOT NULL` | CURRENT_TIMESTAMP | Last update timestamp |
 
@@ -692,7 +692,7 @@ Returns all categories belonging to the authenticated user, including their asso
     "name": "Transportation",
     "budget": 500000,
     "color": "#3B82F6",
-    "icon": "commute",
+    "icon": "directions_car",
     "userId": "c1f7a1f5-19e0-4786-9481-807d9b73f8a4"
   }
   ```
@@ -701,7 +701,7 @@ Returns all categories belonging to the authenticated user, including their asso
   | `name` | string | None | Yes |
   | `budget` | decimal | `0` | No |
   | `color` | string | `"#3B82F6"` | No |
-  | `icon` | string | `"folder"` | No |
+  | `icon` | string | `"category"` | No |
   | `userId` | UUID | None | Yes |
 
 - **Success Response (201 Created):**
@@ -719,6 +719,7 @@ Returns all categories belonging to the authenticated user, including their asso
 - **Route:** `PUT /categories/:id`
 - **Auth:** Bearer Token
 - **Request Body:** Partial category fields (`name`, `budget`, `color`, `icon`).
+- `icon` must be one of: `restaurant`, `local_cafe`, `local_bar`, `fastfood`, `shopping_cart`, `directions_car`, `directions_bus`, `local_taxi`, `flight`, `two_wheeler`, `home`, `bolt`, `water_drop`, `wifi`, `phone_android`, `build`, `shopping_bag`, `devices`, `chair`, `card_giftcard`, `pets`, `medical_services`, `medication`, `fitness_center`, `spa`, `movie`, `sports_esports`, `music_note`, `luggage`, `school`, `child_care`, `payments`, `work`, `trending_up`, `savings`, `account_balance`, `credit_card`, `redeem`, `swap_horiz`, `category`.
 - **Success Response (200 OK):**
   ```json
   {
@@ -997,7 +998,7 @@ Generates an aggregated financial report for spending transactions, category bud
           "id": "31a02931-18bb-4bc4-9d10-84a20b0808bb",
           "name": "Transportation",
           "color": "#3B82F6",
-          "icon": "commute",
+          "icon": "directions_car",
           "amount": 475000.0,
           "budget": 500000.0,
           "percentageOfTotal": 33.3,
