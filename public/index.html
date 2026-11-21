@@ -1,686 +1,989 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Fintrack - Intelligent Personal Finance</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#a83905", "secondary": "#496172", "secondary-container": "#cce6fa", "surface-tint": "#a83905", "primary-container": "#fe7743", "surface-container-highest": "#e5e1e5", "secondary-fixed-dim": "#b1cade", "inverse-on-surface": "#f3eff3", "on-primary-fixed-variant": "#812800", "on-primary-container": "#651e00", "on-secondary-fixed": "#031e2d", "secondary-fixed": "#cce6fa", "on-surface-variant": "#58423a", "surface-bright": "#fcf8fc", "surface-container-lowest": "#ffffff", "primary-fixed-dim": "#ffb59b", "tertiary": "#7d544e", "inverse-surface": "#313033", "inverse-primary": "#ffb59b", "on-error": "#ffffff", "on-secondary-container": "#4f6779", "surface": "#fcf8fc", "on-tertiary": "#ffffff", "surface-container-low": "#f6f2f6", "on-secondary-fixed-variant": "#32495a", "background": "#fcf8fc", "on-surface": "#1c1b1e", "expense-burgundy": "#830100", "income-green": "#4DB441", "on-tertiary-container": "#4f2d27", "error": "#ba1a1a", "on-tertiary-fixed": "#30130f", "on-tertiary-fixed-variant": "#623d37", "surface-container": "#f0edf1", "on-primary": "#ffffff", "tertiary-container": "#c4938c", "surface-variant": "#e5e1e5", "on-secondary": "#ffffff", "outline": "#8c7168", "on-error-container": "#93000a", "on-background": "#1c1b1e", "text-high-emphasis": "#1A1A1A", "surface-container-high": "#ebe7eb", "surface-pure": "#FFFFFF", "text-placeholder": "#C3C3C3", "primary-fixed": "#ffdbcf", "surface-dim": "#dcd9dd", "tertiary-fixed-dim": "#efbab2", "tertiary-fixed": "#ffdad5", "on-primary-fixed": "#380d00", "border-neutral": "#D9D9D9", "error-container": "#ffdad6", "outline-variant": "#e0c0b5" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "margin": "1.5rem", "space-2xl": "2.5rem", "space-2xs": "0.125rem", "space-sm": "0.5rem", "gutter": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem", "space-md": "1rem", "gutter-sm": "0.5rem" }, "fontFamily": { "currency-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "caption": ["Plus Jakarta Sans"], "currency-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "button-lg": ["Plus Jakarta Sans"], "chip-label": ["Plus Jakarta Sans"], "input-label": ["Plus Jakarta Sans"], "display-hero-mobile": ["Plus Jakarta Sans"], "display-hero": ["Plus Jakarta Sans"], "input-hint": ["Plus Jakarta Sans"], "tab-label": ["Plus Jakarta Sans"] }, "fontSize": { "currency-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "currency-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "0em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "button-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "800" }], "chip-label": ["14px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "700" }], "input-label": ["16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "700" }], "display-hero-mobile": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "display-hero": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "input-hint": ["16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "tab-label": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1200px] mx-auto px-margin flex items-center justify-between"><a class="flex items-center gap-space-sm" data-path="landing-home" href="#"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-surface-container-lowest text-[22px]">account_balance_wallet</span></div><span class="font-headline-sm text-headline-sm font-extrabold tracking-tight text-on-surface">Fintrack</span></a><nav class="hidden lg:flex items-center gap-space-xl" data-active-classes="text-primary-container font-bold"><a class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors" data-path="features" href="#">Features</a><a class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors" data-path="security" href="#">Security</a><a class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing" href="#">Pricing</a><a class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors" data-path="reviews" href="#">Reviews</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center px-space-md py-space-sm font-button-lg text-button-lg text-on-surface hover:text-primary transition-colors" data-path="login" href="#">Sign In</a><a class="inline-flex items-center justify-center h-[52px] px-space-lg rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg hover:bg-primary transition-all" data-path="get-started" href="#">Get Started Free</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
-<!-- HERO SECTION -->
-<section class="relative w-full overflow-hidden pt-space-xl pb-space-2xl bg-surface">
-<!-- Ambient Blur Spheres -->
-<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
-<div class="absolute top-1/3 -right-32 w-[400px] h-[400px] bg-secondary-container/30 rounded-full blur-3xl pointer-events-none"></div>
-<div class="max-w-[1200px] mx-auto px-margin relative z-10">
-<!-- Top Badge / Social Proof Chip -->
-<div class="flex flex-wrap items-center justify-center gap-space-sm mb-space-lg">
-<div class="inline-flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-xs rounded-full shadow-sm">
-<span class="text-primary-container font-currency-md text-currency-md">★</span>
-<span class="font-tab-label text-tab-label text-on-surface">4.9/5 by 85,000+ active savers</span>
-<span class="w-1.5 h-1.5 rounded-full bg-border-neutral mx-space-2xs"></span>
-<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
-<span class="font-caption text-caption text-secondary font-bold">Bank-Grade 256-Bit</span>
-</div>
-</div>
-<!-- Main Headline & Subtitle -->
-<div class="max-w-4xl mx-auto text-center flex flex-col items-center">
-<h1 class="font-display-hero text-display-hero lg:text-[54px] lg:leading-[62px] text-on-surface tracking-tight mb-space-md font-extrabold">
-          Master Your Money with <span class="text-primary-container">Daily Spending Velocity</span> &amp; Smart Budgets
-        </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-center mb-space-xl">
-          Fintrack connects all your bank accounts and e-wallets, calculates your exact daily spend allowance, and visualizes where every rupiah goes in real time.
-        </p>
-<!-- CTA Buttons -->
-<div class="flex flex-col sm:flex-row items-center justify-center gap-space-md w-full max-w-md mb-space-2xl">
-<a class="w-full sm:w-auto flex-1 h-[52px] px-space-lg rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-primary transition-all shadow-md group" href="#">
-<span class="material-symbols-outlined text-[20px]">download</span>
-<span>Get Started Free</span>
-<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-<button class="w-full sm:w-auto flex-1 h-[52px] px-space-lg rounded-xl bg-surface-container-lowest text-secondary font-button-lg text-button-lg flex items-center justify-center gap-space-sm shadow-sm hover:bg-surface-container transition-all" id="demoTrigger">
-<span class="material-symbols-outlined text-primary-container text-[20px]">play_circle</span>
-<span>Live Interactive Demo</span>
-</button>
-</div>
-</div>
-<!-- Dynamic Hero Showcase: Multi-Device Layered UI Mockup -->
-<div class="relative w-full max-w-5xl mx-auto mt-space-md">
-<!-- Floating Micro Card 1: Safe Burn Velocity -->
-<div class="hidden lg:flex absolute -left-6 top-16 z-20 bg-surface-container-lowest p-space-md rounded-xl shadow-xl items-center gap-space-md animate-bounce duration-1000">
-<div class="w-12 h-12 rounded-xl bg-income-green/10 flex items-center justify-center text-income-green">
-<span class="material-symbols-outlined text-[26px]">speed</span>
-</div>
-<div>
-<div class="font-caption text-caption text-on-surface-variant uppercase font-bold tracking-wider">Daily Spending Target</div>
-<div class="font-currency-md text-currency-md text-income-green">Rp 83.300 / day</div>
-<div class="font-caption text-caption text-on-surface-variant text-[11px]">Buffer: Safe (+Rp 420.000 surplus)</div>
-</div>
-</div>
-<!-- Floating Micro Card 2: Reconciled Banks -->
-<div class="hidden lg:flex absolute -right-6 bottom-20 z-20 bg-surface-container-lowest p-space-md rounded-xl shadow-xl items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined text-[26px]">sync_saved_locally</span>
-</div>
-<div>
-<div class="font-caption text-caption text-on-surface-variant font-bold">Auto-Reconciled</div>
-<div class="font-tab-label text-tab-label text-on-surface">BCA • Mandiri • GoPay</div>
-<div class="font-caption text-caption text-secondary flex items-center gap-space-2xs text-[11px]">
-<span class="w-1.5 h-1.5 rounded-full bg-income-green animate-ping"></span> Live Webhook Active
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="web_standard" name="shell-type">
+    <title>Fintrack - Intelligent Personal Finance</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        @layer base {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#a83905", "secondary": "#496172", "secondary-container": "#cce6fa", "surface-tint": "#a83905", "primary-container": "#fe7743", "surface-container-highest": "#e5e1e5", "secondary-fixed-dim": "#b1cade", "inverse-on-surface": "#f3eff3", "on-primary-fixed-variant": "#812800", "on-primary-container": "#651e00", "on-secondary-fixed": "#031e2d", "secondary-fixed": "#cce6fa", "on-surface-variant": "#58423a", "surface-bright": "#fcf8fc", "surface-container-lowest": "#ffffff", "primary-fixed-dim": "#ffb59b", "tertiary": "#7d544e", "inverse-surface": "#313033", "inverse-primary": "#ffb59b", "on-error": "#ffffff", "on-secondary-container": "#4f6779", "surface": "#fcf8fc", "on-tertiary": "#ffffff", "surface-container-low": "#f6f2f6", "on-secondary-fixed-variant": "#32495a", "background": "#fcf8fc", "on-surface": "#1c1b1e", "expense-burgundy": "#830100", "income-green": "#4DB441", "on-tertiary-container": "#4f2d27", "error": "#ba1a1a", "on-tertiary-fixed": "#30130f", "on-tertiary-fixed-variant": "#623d37", "surface-container": "#f0edf1", "on-primary": "#ffffff", "tertiary-container": "#c4938c", "surface-variant": "#e5e1e5", "on-secondary": "#ffffff", "outline": "#8c7168", "on-error-container": "#93000a", "on-background": "#1c1b1e", "text-high-emphasis": "#1A1A1A", "surface-container-high": "#ebe7eb", "surface-pure": "#FFFFFF", "text-placeholder": "#C3C3C3", "primary-fixed": "#ffdbcf", "surface-dim": "#dcd9dd", "tertiary-fixed-dim": "#efbab2", "tertiary-fixed": "#ffdad5", "on-primary-fixed": "#380d00", "border-neutral": "#D9D9D9", "error-container": "#ffdad6", "outline-variant": "#e0c0b5" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "margin": "1.5rem", "space-2xl": "2.5rem", "space-2xs": "0.125rem", "space-sm": "0.5rem", "gutter": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem", "space-md": "1rem", "gutter-sm": "0.5rem" }, "fontFamily": { "currency-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "caption": ["Plus Jakarta Sans"], "currency-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "button-lg": ["Plus Jakarta Sans"], "chip-label": ["Plus Jakarta Sans"], "input-label": ["Plus Jakarta Sans"], "display-hero-mobile": ["Plus Jakarta Sans"], "display-hero": ["Plus Jakarta Sans"], "input-hint": ["Plus Jakarta Sans"], "tab-label": ["Plus Jakarta Sans"] }, "fontSize": { "currency-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "currency-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "0em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "button-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "800" }], "chip-label": ["14px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "700" }], "input-label": ["16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "700" }], "display-hero-mobile": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "display-hero": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "input-hint": ["16px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "tab-label": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "700" }] } } } };</script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface">
+    <header
+        class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+        <div class="h-20 max-w-[1200px] mx-auto px-margin flex items-center justify-between"><a
+                class="flex items-center gap-space-sm" data-path="landing-home" href="#">
+                <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center"><span
+                        class="material-symbols-outlined text-surface-container-lowest text-[22px]">account_balance_wallet</span>
+                </div><span
+                    class="font-headline-sm text-headline-sm font-extrabold tracking-tight text-on-surface">Fintrack</span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-space-xl"
+                data-active-classes="text-primary-container font-bold"><a
+                    class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="features" href="#">Features</a><a
+                    class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="how-it-works" href="#">How It Works</a><a
+                    class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="security" href="#">Security</a><a
+                    class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="pricing" href="#">Pricing</a><a
+                    class="font-tab-label text-tab-label text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-path="reviews" href="#">Reviews</a></nav>
+            <div class="flex items-center gap-space-md"><a
+                    class="hidden sm:inline-flex items-center px-space-md py-space-sm font-button-lg text-button-lg text-on-surface hover:text-primary transition-colors"
+                    data-path="login" href="#">Sign In</a><a
+                    class="inline-flex items-center justify-center h-[52px] px-space-lg rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg hover:bg-primary transition-all"
+                    data-path="get-started" href="#">Get Started Free</a>
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span
+                        class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
             </div>
-</div>
-</div>
-<!-- Primary Center Mockup Canvas -->
-<div class="w-full bg-secondary text-surface-container-lowest rounded-2xl p-space-md sm:p-space-xl shadow-2xl relative overflow-hidden">
-<!-- Top Simulated App Bar -->
-<div class="flex items-center justify-between pb-space-md mb-space-md">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-surface-container-lowest text-[20px]">account_balance_wallet</span>
-</div>
-<div>
-<div class="font-caption text-caption text-surface-container-lowest/60">Total Net Worth Liquidity</div>
-<div class="font-currency-lg text-currency-lg text-surface-container-lowest">Rp 19.200.000</div>
-</div>
-</div>
-<!-- Segmented Rail (Mobile/Tablet Aesthetic) -->
-<div class="hidden sm:flex items-center h-[34px] bg-secondary-fixed/20 p-[2px] rounded-full">
-<button class="px-space-md h-full rounded-full bg-primary-container text-surface-container-lowest font-tab-label text-tab-label">ALL</button>
-<button class="px-space-md h-full rounded-full text-surface-container-lowest/70 hover:text-surface-container-lowest font-tab-label text-tab-label">EXPENSE</button>
-<button class="px-space-md h-full rounded-full text-surface-container-lowest/70 hover:text-surface-container-lowest font-tab-label text-tab-label">INCOME</button>
-</div>
-</div>
-<!-- App Grid Interior -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
-<!-- Left Panel: Velocity & Progress Tracker -->
-<div class="md:col-span-7 bg-surface-container-lowest text-on-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-space-sm">
-<div>
-<span class="font-caption text-caption text-on-surface-variant font-bold uppercase tracking-wider">Monthly Outflow Burn</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface">Rp 4.550.000</h3>
-</div>
-<span class="px-space-sm py-space-2xs rounded-full bg-income-green/15 text-income-green font-caption text-caption font-bold">-14% vs Last Month</span>
-</div>
-<!-- Custom Inline SVG Velocity Spark-Bar Chart -->
-<div class="w-full pt-space-sm pb-space-sm">
-<div class="flex items-end justify-between gap-space-xs h-28 w-full pt-4">
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all" style="height: 45%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">01</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all" style="height: 60%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">05</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all" style="height: 35%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">10</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all" style="height: 75%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">15</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all" style="height: 50%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">20</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group">
-<div class="w-full bg-primary-container rounded-t shadow-md" style="height: 88%;"></div>
-<span class="font-caption text-[10px] text-primary-container font-bold">TODAY</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-1 group opacity-40">
-<div class="w-full bg-border-neutral rounded-t border-dashed" style="height: 40%;"></div>
-<span class="font-caption text-[10px] text-on-surface-variant">28</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Real-time Burn Metrics Footer -->
-<div class="grid grid-cols-2 gap-space-sm pt-space-sm border-t-0 mt-space-sm">
-<div class="bg-surface-container-low p-space-sm rounded-lg">
-<div class="font-caption text-caption text-on-surface-variant">Days Remaining</div>
-<div class="font-tab-label text-tab-label text-on-surface">12 Days in Cycle</div>
-</div>
-<div class="bg-surface-container-low p-space-sm rounded-lg">
-<div class="font-caption text-caption text-on-surface-variant">Remaining Safe Pool</div>
-<div class="font-tab-label text-tab-label text-income-green">Rp 1.000.000</div>
-</div>
-</div>
-</div>
-<!-- Right Panel: Budget Cards & Live Pacing -->
-<div class="md:col-span-5 flex flex-col gap-space-md">
-<!-- Budget Highlight Card (Primary Orange Filled) -->
-<div class="bg-primary-container text-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-space-sm">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-[20px]">restaurant</span>
-<span class="font-tab-label text-tab-label">Food &amp; Beverage</span>
-</div>
-<span class="font-caption text-caption font-bold bg-surface-container-lowest/20 px-space-xs py-space-2xs rounded">62.5% Used</span>
-</div>
-<div class="mb-space-sm">
-<div class="font-currency-lg text-currency-lg leading-tight">Rp 1.500.000</div>
-<div class="font-caption text-caption text-surface-container-lowest/80">Capped budget of Rp 2.400.000</div>
-</div>
-<!-- Progress Line -->
-<div class="w-full bg-surface-container-lowest/30 h-2 rounded-full overflow-hidden">
-<div class="bg-surface-container-lowest h-full rounded-full" style="width: 62.5%;"></div>
-</div>
-</div>
-<!-- Mini Wallet Feeds -->
-<div class="bg-surface-container-lowest text-on-surface p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
-<div class="font-caption text-caption text-on-surface-variant font-bold uppercase tracking-wider">Connected Wallets</div>
-<div class="flex items-center justify-between p-space-xs hover:bg-surface-container-low rounded-lg transition-colors">
-<div class="flex items-center gap-space-sm">
-<div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-bold text-[12px]">BCA</div>
-<div>
-<div class="font-tab-label text-tab-label leading-tight">Tahapan Utama</div>
-<div class="font-caption text-[11px] text-on-surface-variant">Bank Transfer • Instant</div>
-</div>
-</div>
-<div class="font-tab-label text-tab-label text-on-surface">Rp 12.850.000</div>
-</div>
-<div class="flex items-center justify-between p-space-xs hover:bg-surface-container-low rounded-lg transition-colors">
-<div class="flex items-center gap-space-sm">
-<div class="w-8 h-8 rounded-lg bg-primary-container/15 flex items-center justify-center text-primary-container font-bold text-[12px]">GP</div>
-<div>
-<div class="font-tab-label text-tab-label leading-tight">GoPay Digital</div>
-<div class="font-caption text-[11px] text-on-surface-variant">E-Wallet • Auto-Sync</div>
-</div>
-</div>
-<div class="font-tab-label text-tab-label text-on-surface">Rp 1.450.000</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- TRUSTED PARTNERS & INTEGRATIONS CAROUSEL/BANNER -->
-<section class="w-full py-space-xl bg-surface-container-low">
-<div class="max-w-[1200px] mx-auto px-margin">
-<p class="font-caption text-caption text-on-surface-variant text-center uppercase tracking-widest font-bold mb-space-lg">
-        Seamlessly connects with your favorite banks and digital wallets
-      </p>
-<div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-space-md items-center justify-items-center opacity-85">
-<!-- Bank Central Asia -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">BCA</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Open Banking</span>
-</div>
-<!-- Bank Mandiri -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">MANDIRI</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Livin API</span>
-</div>
-<!-- GoPay -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-primary-container">GoPay</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Direct Sync</span>
-</div>
-<!-- OVO -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">OVO</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Live e-Money</span>
-</div>
-<!-- ShopeePay -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-primary-container">ShopeePay</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Direct Webhook</span>
-</div>
-<!-- Dana -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">DANA</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Wallet API</span>
-</div>
-<!-- BRI -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">BRI</span>
-<span class="font-caption text-[10px] text-on-surface-variant">BRImo Direct</span>
-</div>
-<!-- BNI -->
-<div class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
-<span class="font-currency-md text-currency-md font-extrabold text-secondary">BNI</span>
-<span class="font-caption text-[10px] text-on-surface-variant">Mobile Banking</span>
-</div>
-</div>
-</div>
-</section>
-<!-- KEY VALUE PROPOSITION & NUMERICAL IMPACT METRICS -->
-<section class="w-full py-space-2xl bg-surface">
-<div class="max-w-[1200px] mx-auto px-margin">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-space-lg">
-<div class="flex flex-col bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
-<span class="font-display-hero text-display-hero text-primary-container">Rp 120B+</span>
-<span class="font-tab-label text-tab-label text-on-surface mt-space-2xs">Total Outflow Tracked</span>
-<span class="font-caption text-caption text-on-surface-variant mt-1">Across 14 leading financial institutions</span>
-</div>
-<div class="flex flex-col bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
-<span class="font-display-hero text-display-hero text-secondary">85,000+</span>
-<span class="font-tab-label text-tab-label text-on-surface mt-space-2xs">Disciplined Savers</span>
-<span class="font-caption text-caption text-on-surface-variant mt-1">Actively hitting monthly targets</span>
-</div>
-<div class="flex flex-col bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
-<span class="font-display-hero text-display-hero text-income-green">23%</span>
-<span class="font-tab-label text-tab-label text-on-surface mt-space-2xs">Average Month 1 Savings</span>
-<span class="font-caption text-caption text-on-surface-variant mt-1">Cut wasteful impulse splurges</span>
-</div>
-<div class="flex flex-col bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
-<span class="font-display-hero text-display-hero text-secondary">0</span>
-<span class="font-tab-label text-tab-label text-on-surface mt-space-2xs">Customer Records Sold</span>
-<span class="font-caption text-caption text-on-surface-variant mt-1">Zero ad networks or third parties</span>
-</div>
-</div>
-</div>
-</section>
-<!-- CORE FEATURE SHOWCASE: ASYMMETRIC BENTO GRID -->
-<section class="w-full py-space-2xl bg-surface-container-low" id="features">
-<div class="max-w-[1200px] mx-auto px-margin">
-<div class="text-center max-w-2xl mx-auto mb-space-2xl">
-<span class="font-caption text-caption text-primary-container font-extrabold uppercase tracking-widest">Engineered for Daily Action</span>
-<h2 class="font-display-hero text-display-hero text-on-surface mt-space-xs font-extrabold">
-          Stop wondering where your salary went. Guide it with precision.
-        </h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
-          Traditional budget tools tell you what you spent last month. Fintrack tells you exactly how much you can spend safely before sundown today.
-        </p>
-</div>
-<!-- Bento Grid Elements -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
-<!-- Feature 1: Dynamic Daily Spend Allowance (Large Left Col) -->
-<div class="md:col-span-7 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 rounded-xl bg-primary-container/15 text-primary-container flex items-center justify-center mb-space-md">
-<span class="material-symbols-outlined text-[28px]">pace</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
-              Dynamic Daily Spend Allowance
-            </h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
-              Budgets are tied directly to your active accounts and automatically calibrate targets based on how many days are left in your pay cycle. Spend less on Monday, and watch your weekend dinner buffer grow automatically.
-            </p>
-</div>
-<!-- Feature Graphic: Allowance Dial & Preview Card -->
-<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
-<div>
-<div class="font-caption text-caption text-on-surface-variant font-bold">TODAY'S SAFE PACE</div>
-<div class="font-currency-lg text-currency-lg text-primary-container">Rp 83.300 <span class="font-caption text-caption text-on-surface-variant">/ day</span></div>
-<div class="font-caption text-caption text-income-green font-bold flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[16px]">check_circle</span> Budget Surplus: +Rp 24.000 yesterday
-              </div>
-</div>
-<div class="w-full sm:w-auto flex sm:flex-col gap-space-xs">
-<span class="px-space-md py-space-xs bg-surface-container-lowest rounded-lg font-caption text-caption text-on-surface font-bold text-center">Dinner Cap: Rp 45.000</span>
-<span class="px-space-md py-space-xs bg-surface-container-lowest rounded-lg font-caption text-caption text-on-surface font-bold text-center">Transport Cap: Rp 38.300</span>
-</div>
-</div>
-</div>
-<!-- Feature 2: Consolidated Multi-Wallet Hub (Right Col) -->
-<div class="md:col-span-5 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center mb-space-md">
-<span class="material-symbols-outlined text-[28px]">account_balance</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
-              Unified Multi-Wallet Hub
-            </h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
-              Never log into four different banking apps again. Aggregate BCA, Mandiri, GoPay, and physical cash into one single consolidated real-time dashboard.
-            </p>
-</div>
-<!-- Mini Layered Graphic -->
-<div class="space-y-space-xs bg-surface-container-low p-space-md rounded-xl">
-<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-secondary text-[20px]">credit_card</span>
-<span class="font-tab-label text-tab-label">Bank Accounts</span>
-</div>
-<span class="font-tab-label text-tab-label text-on-surface">Rp 14.500.000</span>
-</div>
-<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-primary-container text-[20px]">smartphone</span>
-<span class="font-tab-label text-tab-label">Digital Wallets</span>
-</div>
-<span class="font-tab-label text-tab-label text-on-surface">Rp 3.850.000</span>
-</div>
-<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-income-green text-[20px]">payments</span>
-<span class="font-tab-label text-tab-label">Physical Cash Stash</span>
-</div>
-<span class="font-tab-label text-tab-label text-on-surface">Rp 850.000</span>
-</div>
-</div>
-</div>
-<!-- Feature 3: Frictionless 3-Tap Logging & Receipt Capture -->
-<div class="md:col-span-5 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 rounded-xl bg-income-green/15 text-income-green flex items-center justify-center mb-space-md">
-<span class="material-symbols-outlined text-[28px]">document_scanner</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
-              Frictionless 3-Tap Logging &amp; OCR
-            </h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
-              Snap a paper receipt or let OCR parse your GoFood or Grab invoice instantly. Categories, merchant tags, and tax splits assign automatically with zero manual spreadsheet fatigue.
-            </p>
-</div>
-<div class="bg-surface-container-low p-space-md rounded-xl flex items-center gap-space-md">
-<div class="w-14 h-14 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center text-on-surface-variant shadow-sm">
-<span class="material-symbols-outlined text-primary-container text-[24px]">receipt_long</span>
-<span class="font-caption text-[9px] uppercase font-bold">OCR Read</span>
-</div>
-<div class="flex-1 min-w-0">
-<div class="font-tab-label text-tab-label text-on-surface truncate">Kopi Kenangan Senopati</div>
-<div class="font-caption text-caption text-income-green font-bold">Detected: Rp 48.000 (F&amp;B)</div>
-<div class="font-caption text-caption text-on-surface-variant text-[11px]">Auto-charged to GoPay</div>
-</div>
-</div>
-</div>
-<!-- Feature 4: Spending Velocity & Kinetic Insights -->
-<div class="md:col-span-7 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center mb-space-md">
-<span class="material-symbols-outlined text-[28px]">trending_up</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
-              Spending Velocity &amp; Kinetic Insights
-            </h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
-              Fintrack benchmarks your personal outflow trajectory against normal patterns. Receive subtle notifications before you cross the danger threshold—not after your salary has vanished.
-            </p>
-</div>
-<!-- In-depth Visualization Bar -->
-<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm">
-<div class="flex items-center justify-between">
-<span class="font-caption text-caption text-on-surface-variant font-bold">CURRENT VELOCITY TREND</span>
-<span class="font-caption text-caption text-income-green font-bold">Optimum Pacing (Tier 1)</span>
-</div>
-<!-- Multi-segment visual bar -->
-<div class="w-full h-3 rounded-full bg-surface-container-lowest overflow-hidden flex">
-<div class="bg-income-green h-full" style="width: 45%;" title="Essentials"></div>
-<div class="bg-primary-container h-full" style="width: 25%;" title="Discretionary"></div>
-<div class="bg-secondary h-full" style="width: 15%;" title="Investments"></div>
-</div>
-<div class="flex flex-wrap items-center justify-between text-[11px] font-caption text-on-surface-variant pt-1">
-<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-income-green"></span> Fixed Living (45%)</span>
-<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container"></span> Lifestyle (25%)</span>
-<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Auto-Invested (15%)</span>
-<span class="text-income-green font-bold">+15% Saved</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- WHY FINTRACK VS SPREADSHEETS (COMPARISON MATRIX) -->
-<section class="w-full py-space-2xl bg-surface">
-<div class="max-w-[1000px] mx-auto px-margin">
-<div class="text-center max-w-xl mx-auto mb-space-xl">
-<h2 class="font-display-hero text-display-hero text-on-surface font-extrabold">
-          Why Modern Earners Ditch Spreadsheets for Fintrack
-        </h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
-          Spreadsheets are great for accounting history. Fintrack is built for real-time everyday behavioral decision making.
-        </p>
-</div>
-<div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden">
-<!-- Table Header -->
-<div class="grid grid-cols-12 bg-secondary p-space-md text-surface-container-lowest items-center">
-<div class="col-span-5 font-tab-label text-tab-label">Core Capability</div>
-<div class="col-span-3 text-center font-caption text-caption text-surface-container-lowest/70 uppercase">Manual Sheets</div>
-<div class="col-span-4 text-center font-tab-label text-tab-label text-primary-container bg-surface-container-lowest py-space-2xs rounded-lg shadow-sm">Fintrack Mobile App</div>
-</div>
-<!-- Row 1 -->
-<div class="grid grid-cols-12 p-space-md items-center border-b-0 hover:bg-surface-container-low transition-colors">
-<div class="col-span-5">
-<div class="font-tab-label text-tab-label text-on-surface">Live Bank Reconciliation</div>
-<div class="font-caption text-caption text-on-surface-variant">Automatic imports via verified API</div>
-</div>
-<div class="col-span-3 text-center text-on-surface-variant">
-<span class="material-symbols-outlined text-error text-[20px]">close</span>
-<div class="font-caption text-[11px]">Manual typing</div>
-</div>
-<div class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-<span class="font-tab-label text-tab-label">Instant &amp; Automated</span>
-</div>
-</div>
-<!-- Row 2 -->
-<div class="grid grid-cols-12 p-space-md items-center bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
-<div class="col-span-5">
-<div class="font-tab-label text-tab-label text-on-surface">Daily Spend Velocity</div>
-<div class="font-caption text-caption text-on-surface-variant">Live recalculation of safe daily burn</div>
-</div>
-<div class="col-span-3 text-center text-on-surface-variant">
-<span class="material-symbols-outlined text-error text-[20px]">close</span>
-<div class="font-caption text-[11px]">Static month totals</div>
-</div>
-<div class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-<span class="font-tab-label text-tab-label">Calculated Real-time</span>
-</div>
-</div>
-<!-- Row 3 -->
-<div class="grid grid-cols-12 p-space-md items-center hover:bg-surface-container-low transition-colors">
-<div class="col-span-5">
-<div class="font-tab-label text-tab-label text-on-surface">Receipt OCR &amp; Auto-Categorization</div>
-<div class="font-caption text-caption text-on-surface-variant">AI parser for paper and electronic receipts</div>
-</div>
-<div class="col-span-3 text-center text-on-surface-variant">
-<span class="material-symbols-outlined text-error text-[20px]">close</span>
-<div class="font-caption text-[11px]">Manual row insertion</div>
-</div>
-<div class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-<span class="font-tab-label text-tab-label">3 Seconds Photo-to-Log</span>
-</div>
-</div>
-<!-- Row 4 -->
-<div class="grid grid-cols-12 p-space-md items-center bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
-<div class="col-span-5">
-<div class="font-tab-label text-tab-label text-on-surface">Proactive Push Interventions</div>
-<div class="font-caption text-caption text-on-surface-variant">Warns you before overspending happens</div>
-</div>
-<div class="col-span-3 text-center text-on-surface-variant">
-<span class="material-symbols-outlined text-error text-[20px]">close</span>
-<div class="font-caption text-[11px]">Silent &amp; passive</div>
-</div>
-<div class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-<span class="font-tab-label text-tab-label">Smart Gentle Alerts</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- SOCIAL PROOF: REAL REVIEWS FROM PROACTIVE FINTRACKERS -->
+        </div>
+    </header>
+    <main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
+        <div class="flex flex-col w-full">
+            <!-- HERO SECTION -->
+            <section class="relative w-full overflow-hidden pt-space-xl pb-space-2xl bg-surface">
+                <!-- Ambient Blur Spheres -->
+                <div
+                    class="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-primary-container/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute top-1/3 -right-32 w-[400px] h-[400px] bg-secondary-container/30 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div class="max-w-[1200px] mx-auto px-margin relative z-10">
+                    <!-- Top Badge / Social Proof Chip -->
+                    <div class="flex flex-wrap items-center justify-center gap-space-sm mb-space-lg">
+                        <div
+                            class="inline-flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-xs rounded-full shadow-sm">
+                            <span class="text-primary-container font-currency-md text-currency-md">★</span>
+                            <span class="font-tab-label text-tab-label text-on-surface">4.9/5 by 85,000+ active
+                                savers</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-border-neutral mx-space-2xs"></span>
+                            <span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+                            <span class="font-caption text-caption text-secondary font-bold">Bank-Grade 256-Bit</span>
+                        </div>
+                    </div>
+                    <!-- Main Headline & Subtitle -->
+                    <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+                        <h1
+                            class="font-display-hero text-display-hero lg:text-[54px] lg:leading-[62px] text-on-surface tracking-tight mb-space-md font-extrabold">
+                            Master Your Money with <span class="text-primary-container">Daily Spending Velocity</span>
+                            &amp; Smart Budgets
+                        </h1>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-center mb-space-xl">
+                            Fintrack connects all your bank accounts and e-wallets, calculates your exact daily spend
+                            allowance, and visualizes where every rupiah goes in real time.
+                        </p>
+                        <!-- CTA Buttons -->
+                        <div
+                            class="flex flex-col sm:flex-row items-center justify-center gap-space-md w-full max-w-md mb-space-2xl">
+                            <a class="w-full sm:w-auto flex-1 h-[52px] px-space-lg rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-primary transition-all shadow-md group"
+                                href="#">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                                <span>Get Started Free</span>
+                                <span
+                                    class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
 
-<!-- SECURITY & PRIVACY SECTION (BANK-GRADE ASSURANCE) -->
-<section class="w-full py-space-2xl bg-surface" id="security">
-<div class="max-w-[1200px] mx-auto px-margin">
-<div class="bg-secondary text-surface-container-lowest rounded-2xl p-space-xl sm:p-space-2xl shadow-lg relative overflow-hidden">
-<!-- Background Shield Accent -->
-<div class="absolute -right-16 -bottom-16 w-80 h-80 text-surface-container-lowest/5 pointer-events-none">
-<span class="material-symbols-outlined text-[280px]">shield</span>
-</div>
-<div class="max-w-2xl">
-<div class="inline-flex items-center gap-space-xs bg-surface-container-lowest/15 px-space-md py-space-xs rounded-full mb-space-md">
-<span class="material-symbols-outlined text-[18px] text-income-green">verified_user</span>
-<span class="font-caption text-caption text-surface-container-lowest uppercase tracking-wider font-bold">BI-SNAP Protocol Certified</span>
-</div>
-<h2 class="font-display-hero text-display-hero text-surface-container-lowest font-extrabold mb-space-md">
-            Your Money Is Sacred. Your Data Remains Yours Alone.
-          </h2>
-<p class="font-body-md text-body-md text-surface-container-lowest/80 mb-space-xl">
-            We use end-to-end 256-bit AES cryptographic channels and read-only tokenization. Fintrack can never initiate transactions or move money on your behalf—only you hold the keys.
-          </p>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
-<div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
-<span class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">lock</span>
-<div class="font-tab-label text-tab-label">Read-Only Access</div>
-<p class="font-caption text-caption text-surface-container-lowest/70 mt-1">Zero ability to transfer or withdraw funds.</p>
-</div>
-<div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
-<span class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">no_accounts</span>
-<div class="font-tab-label text-tab-label">Zero Data Selling</div>
-<p class="font-caption text-caption text-surface-container-lowest/70 mt-1">We make money through Pro tools, not advertising.</p>
-</div>
-<div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
-<span class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">key</span>
-<div class="font-tab-label text-tab-label">Hardware Enclave</div>
-<p class="font-caption text-caption text-surface-container-lowest/70 mt-1">Local biometric FaceID / TouchID protection.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- BOTTOM CONVERSION CTA HERO BANNER -->
-<section class="w-full py-space-2xl bg-surface-container-low">
-<div class="max-w-[1200px] mx-auto px-margin">
-<div class="bg-surface-container-lowest rounded-2xl p-space-xl sm:p-space-2xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-space-xl">
-<div class="max-w-xl">
-<span class="font-caption text-caption text-primary-container font-extrabold uppercase tracking-wider">Start Today Free</span>
-<h2 class="font-display-hero text-display-hero text-on-surface font-extrabold mt-space-xs mb-space-md">
-            Take Control of Your Financial Freedom in 3 Minutes.
-          </h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
-            Download Fintrack today. Connect your primary account, discover your daily spending target, and see how simple wealth building truly feels.
-          </p>
-<div class="flex flex-col sm:flex-row items-center gap-space-md">
-<!-- App Store Button -->
-<a class="w-full sm:w-auto h-[52px] px-space-lg rounded-xl bg-secondary text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-on-secondary-fixed transition-colors" href="#">
-<span class="material-symbols-outlined text-[22px]">phone_iphone</span>
-<span>App Store</span>
-</a>
-<!-- Google Play Button -->
-<a class="w-full sm:w-auto h-[52px] px-space-lg rounded-xl bg-secondary text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-on-secondary-fixed transition-colors" href="#">
-<span class="material-symbols-outlined text-[22px]">android</span>
-<span>Google Play</span>
-</a>
-</div>
-<div class="flex items-center gap-space-sm mt-space-md text-on-surface-variant">
-<span class="material-symbols-outlined text-income-green text-[18px]">verified</span>
-<span class="font-caption text-caption font-bold">30-day money-back guarantee on Pro features • No credit card required to start</span>
-</div>
-</div>
-<!-- QR Code Card for Instant Mobile Scan -->
-<div class="flex flex-col items-center bg-surface-container-low p-space-lg rounded-xl shadow-sm text-center min-w-[240px]">
-<!-- Stylized QR Code SVG -->
-<div class="w-36 h-36 bg-surface-container-lowest p-2 rounded-lg shadow-sm flex items-center justify-center mb-space-sm">
-<svg class="w-full h-full text-secondary" fill="currentColor" viewBox="0 0 100 100">
-<rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4" width="24" x="10" y="10"></rect>
-<rect height="12" width="12" x="16" y="16"></rect>
-<rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4" width="24" x="66" y="10"></rect>
-<rect height="12" width="12" x="72" y="16"></rect>
-<rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4" width="24" x="10" y="66"></rect>
-<rect height="12" width="12" x="16" y="72"></rect>
-<!-- Data squares -->
-<rect height="6" width="6" x="42" y="12"></rect>
-<rect height="6" width="6" x="52" y="18"></rect>
-<rect height="6" width="6" x="42" y="28"></rect>
-<rect height="6" width="6" x="52" y="38"></rect>
-<rect height="6" width="6" x="12" y="44"></rect>
-<rect height="6" width="6" x="22" y="52"></rect>
-<rect height="12" rx="1" width="12" x="44" y="52"></rect>
-<rect height="6" width="6" x="66" y="44"></rect>
-<rect height="6" width="6" x="78" y="52"></rect>
-<rect height="6" width="6" x="66" y="66"></rect>
-<rect height="8" width="8" x="80" y="76"></rect>
-<rect height="6" width="6" x="44" y="76"></rect>
-<rect height="6" width="6" x="54" y="84"></rect>
-</svg>
-</div>
-<span class="font-tab-label text-tab-label text-on-surface">Scan with Camera</span>
-<span class="font-caption text-caption text-on-surface-variant">Instant app download link</span>
-</div>
-</div>
-</div>
-</section>
-<!-- INTERACTIVE LIVE DEMO MODAL (Micro-interaction) -->
-<div class="fixed inset-0 z-50 bg-on-surface/60 backdrop-blur-sm hidden items-center justify-center p-margin" id="demoModal">
-<div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl shadow-2xl p-space-xl relative">
-<div class="flex items-center justify-between mb-space-md">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-primary-container text-[24px]">calculate</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface">Instant Spend Velocity Sim</h3>
-</div>
-<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-on-surface" id="closeDemo">
-<span class="material-symbols-outlined text-[18px]">close</span>
-</button>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
-        Enter your remaining budget and remaining days in the month to see Fintrack's instant safe daily allocation:
-      </p>
-<div class="space-y-space-md mb-space-lg">
-<div>
-<label class="font-input-label text-input-label text-on-surface block mb-1">Remaining Monthly Budget (IDR)</label>
-<div class="h-[52px] bg-surface-container-low rounded-xl px-space-md flex items-center">
-<span class="text-on-surface-variant mr-2">Rp</span>
-<input class="w-full bg-transparent font-currency-md text-currency-md text-on-surface focus:outline-none" id="demoAmount" type="number" value="3000000">
-</div>
-</div>
-<div>
-<label class="font-input-label text-input-label text-on-surface block mb-1">Days Remaining In Cycle</label>
-<div class="h-[52px] bg-surface-container-low rounded-xl px-space-md flex items-center">
-<input class="w-full bg-transparent font-currency-md text-currency-md text-on-surface focus:outline-none" id="demoDays" type="number" value="15">
-<span class="text-on-surface-variant font-tab-label">Days</span>
-</div>
-</div>
-<!-- Live Result Banner -->
-<div class="bg-primary-container/10 p-space-md rounded-xl flex items-center justify-between">
-<div>
-<div class="font-caption text-caption text-on-surface-variant font-bold">YOUR SAFE DAILY TARGET</div>
-<div class="font-currency-lg text-currency-lg text-primary-container" id="demoResult">Rp 200.000 / day</div>
-</div>
-<span class="material-symbols-outlined text-income-green text-[32px]">task_alt</span>
-</div>
-</div>
-<a class="w-full h-[52px] rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-primary transition-all" href="#">
-        Claim Free Account &amp; Lock Budget
-      </a>
-</div>
-</div>
-<!-- Vanilla Interaction Script for Calculator & Modal -->
-<script>
-    (function() {
-      const demoTrigger = document.getElementById('demoTrigger');
-      const demoModal = document.getElementById('demoModal');
-      const closeDemo = document.getElementById('closeDemo');
-      const demoAmount = document.getElementById('demoAmount');
-      const demoDays = document.getElementById('demoDays');
-      const demoResult = document.getElementById('demoResult');
+                        </div>
+                    </div>
+                    <!-- Dynamic Hero Showcase: Multi-Device Layered UI Mockup -->
+                    <div class="relative w-full max-w-5xl mx-auto mt-space-md">
+                        <!-- Floating Micro Card 1: Safe Burn Velocity -->
+                        <div
+                            class="hidden lg:flex absolute -left-6 top-16 z-20 bg-surface-container-lowest p-space-md rounded-xl shadow-xl items-center gap-space-md animate-bounce duration-1000">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-income-green/10 flex items-center justify-center text-income-green">
+                                <span class="material-symbols-outlined text-[26px]">speed</span>
+                            </div>
+                            <div>
+                                <div
+                                    class="font-caption text-caption text-on-surface-variant uppercase font-bold tracking-wider">
+                                    Daily Spending Target</div>
+                                <div class="font-currency-md text-currency-md text-income-green">Rp 83.300 / day</div>
+                                <div class="font-caption text-caption text-on-surface-variant text-[11px]">Buffer: Safe
+                                    (+Rp 420.000 surplus)</div>
+                            </div>
+                        </div>
+                        <!-- Floating Micro Card 2: Reconciled Banks -->
+                        <div
+                            class="hidden lg:flex absolute -right-6 bottom-20 z-20 bg-surface-container-lowest p-space-md rounded-xl shadow-xl items-center gap-space-md">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+                                <span class="material-symbols-outlined text-[26px]">sync_saved_locally</span>
+                            </div>
+                            <div>
+                                <div class="font-caption text-caption text-on-surface-variant font-bold">Auto-Reconciled
+                                </div>
+                                <div class="font-tab-label text-tab-label text-on-surface">BCA • Mandiri • GoPay</div>
+                                <div
+                                    class="font-caption text-caption text-secondary flex items-center gap-space-2xs text-[11px]">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-income-green animate-ping"></span> Live
+                                    Webhook Active
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Primary Center Mockup Canvas -->
+                        <div
+                            class="w-full bg-secondary text-surface-container-lowest rounded-2xl p-space-md sm:p-space-xl shadow-2xl relative overflow-hidden">
+                            <!-- Top Simulated App Bar -->
+                            <div class="flex items-center justify-between pb-space-md mb-space-md">
+                                <div class="flex items-center gap-space-sm">
+                                    <div
+                                        class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 flex items-center justify-center">
+                                        <span
+                                            class="material-symbols-outlined text-surface-container-lowest text-[20px]">account_balance_wallet</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-caption text-caption text-surface-container-lowest/60">Total
+                                            Net Worth Liquidity</div>
+                                        <div class="font-currency-lg text-currency-lg text-surface-container-lowest">Rp
+                                            19.200.000</div>
+                                    </div>
+                                </div>
+                                <!-- Segmented Rail (Mobile/Tablet Aesthetic) -->
+                                <div
+                                    class="hidden sm:flex items-center h-[34px] bg-secondary-fixed/20 p-[2px] rounded-full">
+                                    <button
+                                        class="px-space-md h-full rounded-full bg-primary-container text-surface-container-lowest font-tab-label text-tab-label">ALL</button>
+                                    <button
+                                        class="px-space-md h-full rounded-full text-surface-container-lowest/70 hover:text-surface-container-lowest font-tab-label text-tab-label">EXPENSE</button>
+                                    <button
+                                        class="px-space-md h-full rounded-full text-surface-container-lowest/70 hover:text-surface-container-lowest font-tab-label text-tab-label">INCOME</button>
+                                </div>
+                            </div>
+                            <!-- App Grid Interior -->
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+                                <!-- Left Panel: Velocity & Progress Tracker -->
+                                <div
+                                    class="md:col-span-7 bg-surface-container-lowest text-on-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-space-sm">
+                                            <div>
+                                                <span
+                                                    class="font-caption text-caption text-on-surface-variant font-bold uppercase tracking-wider">Monthly
+                                                    Outflow Burn</span>
+                                                <h3 class="font-headline-sm text-headline-sm text-on-surface">Rp
+                                                    4.550.000</h3>
+                                            </div>
+                                            <span
+                                                class="px-space-sm py-space-2xs rounded-full bg-income-green/15 text-income-green font-caption text-caption font-bold">-14%
+                                                vs Last Month</span>
+                                        </div>
+                                        <!-- Custom Inline SVG Velocity Spark-Bar Chart -->
+                                        <div class="w-full pt-space-sm pb-space-sm">
+                                            <div class="flex items-end justify-between gap-space-xs h-28 w-full pt-4">
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all"
+                                                        style="height: 45%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">01</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all"
+                                                        style="height: 60%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">05</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all"
+                                                        style="height: 35%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">10</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all"
+                                                        style="height: 75%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">15</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-secondary/15 rounded-t group-hover:bg-primary-container transition-all"
+                                                        style="height: 50%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">20</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group">
+                                                    <div class="w-full bg-primary-container rounded-t shadow-md"
+                                                        style="height: 88%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-primary-container font-bold">TODAY</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1 group opacity-40">
+                                                    <div class="w-full bg-border-neutral rounded-t border-dashed"
+                                                        style="height: 40%;"></div>
+                                                    <span
+                                                        class="font-caption text-[10px] text-on-surface-variant">28</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Real-time Burn Metrics Footer -->
+                                    <div class="grid grid-cols-2 gap-space-sm pt-space-sm border-t-0 mt-space-sm">
+                                        <div class="bg-surface-container-low p-space-sm rounded-lg">
+                                            <div class="font-caption text-caption text-on-surface-variant">Days
+                                                Remaining</div>
+                                            <div class="font-tab-label text-tab-label text-on-surface">12 Days in Cycle
+                                            </div>
+                                        </div>
+                                        <div class="bg-surface-container-low p-space-sm rounded-lg">
+                                            <div class="font-caption text-caption text-on-surface-variant">Remaining
+                                                Safe Pool</div>
+                                            <div class="font-tab-label text-tab-label text-income-green">Rp 1.000.000
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Right Panel: Budget Cards & Live Pacing -->
+                                <div class="md:col-span-5 flex flex-col gap-space-md">
+                                    <!-- Budget Highlight Card (Primary Orange Filled) -->
+                                    <div
+                                        class="bg-primary-container text-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+                                        <div class="flex items-center justify-between mb-space-sm">
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="material-symbols-outlined text-[20px]">restaurant</span>
+                                                <span class="font-tab-label text-tab-label">Food &amp; Beverage</span>
+                                            </div>
+                                            <span
+                                                class="font-caption text-caption font-bold bg-surface-container-lowest/20 px-space-xs py-space-2xs rounded">62.5%
+                                                Used</span>
+                                        </div>
+                                        <div class="mb-space-sm">
+                                            <div class="font-currency-lg text-currency-lg leading-tight">Rp 1.500.000
+                                            </div>
+                                            <div class="font-caption text-caption text-surface-container-lowest/80">
+                                                Capped budget of Rp 2.400.000</div>
+                                        </div>
+                                        <!-- Progress Line -->
+                                        <div
+                                            class="w-full bg-surface-container-lowest/30 h-2 rounded-full overflow-hidden">
+                                            <div class="bg-surface-container-lowest h-full rounded-full"
+                                                style="width: 62.5%;"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Mini Wallet Feeds -->
+                                    <div
+                                        class="bg-surface-container-lowest text-on-surface p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+                                        <div
+                                            class="font-caption text-caption text-on-surface-variant font-bold uppercase tracking-wider">
+                                            Connected Wallets</div>
+                                        <div
+                                            class="flex items-center justify-between p-space-xs hover:bg-surface-container-low rounded-lg transition-colors">
+                                            <div class="flex items-center gap-space-sm">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-bold text-[12px]">
+                                                    BCA</div>
+                                                <div>
+                                                    <div class="font-tab-label text-tab-label leading-tight">Tahapan
+                                                        Utama</div>
+                                                    <div class="font-caption text-[11px] text-on-surface-variant">Bank
+                                                        Transfer • Instant</div>
+                                                </div>
+                                            </div>
+                                            <div class="font-tab-label text-tab-label text-on-surface">Rp 12.850.000
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between p-space-xs hover:bg-surface-container-low rounded-lg transition-colors">
+                                            <div class="flex items-center gap-space-sm">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-primary-container/15 flex items-center justify-center text-primary-container font-bold text-[12px]">
+                                                    GP</div>
+                                                <div>
+                                                    <div class="font-tab-label text-tab-label leading-tight">GoPay
+                                                        Digital</div>
+                                                    <div class="font-caption text-[11px] text-on-surface-variant">
+                                                        E-Wallet • Auto-Sync</div>
+                                                </div>
+                                            </div>
+                                            <div class="font-tab-label text-tab-label text-on-surface">Rp 1.450.000
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- TRUSTED PARTNERS & INTEGRATIONS CAROUSEL/BANNER -->
+            <section class="w-full py-space-xl bg-surface-container-low">
+                <div class="max-w-[1200px] mx-auto px-margin">
+                    <p
+                        class="font-caption text-caption text-on-surface-variant text-center uppercase tracking-widest font-bold mb-space-lg">
+                        Seamlessly connects with your favorite banks and digital wallets
+                    </p>
+                    <div
+                        class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-space-md items-center justify-items-center opacity-85">
+                        <!-- GoPay -->
+                        <div
+                            class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
+                            <span
+                                class="font-currency-md text-currency-md font-extrabold text-primary-container">GoPay</span>
+                            <span class="font-caption text-[10px] text-on-surface-variant">Receipt Sharing</span>
+                        </div>
+                        <!-- BNI -->
+                        <div
+                            class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
+                            <span class="font-currency-md text-currency-md font-extrabold text-secondary">BNI</span>
+                            <span class="font-caption text-[10px] text-on-surface-variant">Receipt Sharing</span>
+                        </div>
+                        <div
+                            class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
+                            <span class="font-currency-md text-currency-md font-extrabold text-secondary">Jago</span>
+                            <span class="font-caption text-[10px] text-on-surface-variant">Receipt Sharing</span>
+                        </div>
+                        <div
+                            class="w-full flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded-xl shadow-sm hover:scale-105 transition-transform">
+                            <span class="font-currency-md text-currency-md font-extrabold text-secondary">Many more coming!</span>
+                            <span class="font-caption text-[10px] text-on-surface-variant">Receipt Sharing</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- KEY VALUE PROPOSITION & NUMERICAL IMPACT METRICS -->
 
-      if (demoTrigger && demoModal && closeDemo) {
-        demoTrigger.addEventListener('click', () => {
-          demoModal.classList.remove('hidden');
-          demoModal.classList.add('flex');
-        });
+            <!-- CORE FEATURE SHOWCASE: ASYMMETRIC BENTO GRID -->
+            <section class="w-full py-space-2xl bg-surface-container-low" id="features">
+                <div class="max-w-[1200px] mx-auto px-margin">
+                    <div class="text-center max-w-2xl mx-auto mb-space-2xl">
+                        <span
+                            class="font-caption text-caption text-primary-container font-extrabold uppercase tracking-widest">Engineered
+                            for Daily Action</span>
+                        <h2 class="font-display-hero text-display-hero text-on-surface mt-space-xs font-extrabold">
+                            Stop wondering where your salary went. Guide it with precision.
+                        </h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
+                            Traditional budget tools tell you what you spent last month. Fintrack tells you exactly how
+                            much you can spend safely before sundown today.
+                        </p>
+                    </div>
+                    <!-- Bento Grid Elements -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
+                        <!-- Feature 1: Dynamic Daily Spend Allowance (Large Left Col) -->
+                        <div
+                            class="md:col-span-7 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary-container/15 text-primary-container flex items-center justify-center mb-space-md">
+                                    <span class="material-symbols-outlined text-[28px]">pace</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
+                                    Dynamic Daily Spend Allowance
+                                </h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+                                    Budgets are tied directly to your active accounts and automatically calibrate
+                                    targets based on how many days are left in your pay cycle. Spend less on Monday, and
+                                    watch your weekend dinner buffer grow automatically.
+                                </p>
+                            </div>
+                            <!-- Feature Graphic: Allowance Dial & Preview Card -->
+                            <div
+                                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+                                <div>
+                                    <div class="font-caption text-caption text-on-surface-variant font-bold">TODAY'S
+                                        SAFE PACE</div>
+                                    <div class="font-currency-lg text-currency-lg text-primary-container">Rp 83.300
+                                        <span class="font-caption text-caption text-on-surface-variant">/ day</span>
+                                    </div>
+                                    <div
+                                        class="font-caption text-caption text-income-green font-bold flex items-center gap-1 mt-1">
+                                        <span class="material-symbols-outlined text-[16px]">check_circle</span> Budget
+                                        Surplus: +Rp 24.000 yesterday
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-auto flex sm:flex-col gap-space-xs">
+                                    <span
+                                        class="px-space-md py-space-xs bg-surface-container-lowest rounded-lg font-caption text-caption text-on-surface font-bold text-center">Dinner
+                                        Cap: Rp 45.000</span>
+                                    <span
+                                        class="px-space-md py-space-xs bg-surface-container-lowest rounded-lg font-caption text-caption text-on-surface font-bold text-center">Transport
+                                        Cap: Rp 38.300</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 2: Consolidated Multi-Wallet Hub (Right Col) -->
+                        <div
+                            class="md:col-span-5 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center mb-space-md">
+                                    <span class="material-symbols-outlined text-[28px]">account_balance</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
+                                    Unified Multi-Wallet Hub
+                                </h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                                    Never log into four different banking apps again. Aggregate BCA, Mandiri, GoPay, and
+                                    physical cash into one single consolidated real-time dashboard.
+                                </p>
+                            </div>
+                            <!-- Mini Layered Graphic -->
+                            <div class="space-y-space-xs bg-surface-container-low p-space-md rounded-xl">
+                                <div
+                                    class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
+                                    <div class="flex items-center gap-space-sm">
+                                        <span
+                                            class="material-symbols-outlined text-secondary text-[20px]">credit_card</span>
+                                        <span class="font-tab-label text-tab-label">Bank Accounts</span>
+                                    </div>
+                                    <span class="font-tab-label text-tab-label text-on-surface">Rp 14.500.000</span>
+                                </div>
+                                <div
+                                    class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
+                                    <div class="flex items-center gap-space-sm">
+                                        <span
+                                            class="material-symbols-outlined text-primary-container text-[20px]">smartphone</span>
+                                        <span class="font-tab-label text-tab-label">Digital Wallets</span>
+                                    </div>
+                                    <span class="font-tab-label text-tab-label text-on-surface">Rp 3.850.000</span>
+                                </div>
+                                <div
+                                    class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center justify-between">
+                                    <div class="flex items-center gap-space-sm">
+                                        <span
+                                            class="material-symbols-outlined text-income-green text-[20px]">payments</span>
+                                        <span class="font-tab-label text-tab-label">Physical Cash Stash</span>
+                                    </div>
+                                    <span class="font-tab-label text-tab-label text-on-surface">Rp 850.000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 3: Frictionless 3-Tap Logging & Receipt Capture -->
+                        <div
+                            class="md:col-span-5 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-income-green/15 text-income-green flex items-center justify-center mb-space-md">
+                                    <span class="material-symbols-outlined text-[28px]">document_scanner</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
+                                    Frictionless 3-Tap Logging &amp; OCR
+                                </h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                                    Snap a paper receipt or let OCR parse your GoFood or Grab invoice instantly.
+                                    Categories, merchant tags, and tax splits assign automatically with zero manual
+                                    spreadsheet fatigue.
+                                </p>
+                            </div>
+                            <div class="bg-surface-container-low p-space-md rounded-xl flex items-center gap-space-md">
+                                <div
+                                    class="w-14 h-14 bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center text-on-surface-variant shadow-sm">
+                                    <span
+                                        class="material-symbols-outlined text-primary-container text-[24px]">receipt_long</span>
+                                    <span class="font-caption text-[9px] uppercase font-bold">OCR Read</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="font-tab-label text-tab-label text-on-surface truncate">Kopi Kenangan
+                                        Senopati</div>
+                                    <div class="font-caption text-caption text-income-green font-bold">Detected: Rp
+                                        48.000 (F&amp;B)</div>
+                                    <div class="font-caption text-caption text-on-surface-variant text-[11px]">
+                                        Auto-charged to GoPay</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Feature 4: Spending Velocity & Kinetic Insights -->
+                        <div
+                            class="md:col-span-7 bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center mb-space-md">
+                                    <span class="material-symbols-outlined text-[28px]">trending_up</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">
+                                    Spending Velocity &amp; Kinetic Insights
+                                </h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+                                    Fintrack benchmarks your personal outflow trajectory against normal patterns.
+                                    Receive subtle notifications before you cross the danger threshold—not after your
+                                    salary has vanished.
+                                </p>
+                            </div>
+                            <!-- In-depth Visualization Bar -->
+                            <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-caption text-caption text-on-surface-variant font-bold">CURRENT
+                                        VELOCITY TREND</span>
+                                    <span class="font-caption text-caption text-income-green font-bold">Optimum Pacing
+                                        (Tier 1)</span>
+                                </div>
+                                <!-- Multi-segment visual bar -->
+                                <div class="w-full h-3 rounded-full bg-surface-container-lowest overflow-hidden flex">
+                                    <div class="bg-income-green h-full" style="width: 45%;" title="Essentials"></div>
+                                    <div class="bg-primary-container h-full" style="width: 25%;" title="Discretionary">
+                                    </div>
+                                    <div class="bg-secondary h-full" style="width: 15%;" title="Investments"></div>
+                                </div>
+                                <div
+                                    class="flex flex-wrap items-center justify-between text-[11px] font-caption text-on-surface-variant pt-1">
+                                    <span class="flex items-center gap-1"><span
+                                            class="w-2 h-2 rounded-full bg-income-green"></span> Fixed Living
+                                        (45%)</span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="w-2 h-2 rounded-full bg-primary-container"></span> Lifestyle
+                                        (25%)</span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="w-2 h-2 rounded-full bg-secondary"></span> Auto-Invested (15%)</span>
+                                    <span class="text-income-green font-bold">+15% Saved</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- WHY FINTRACK VS SPREADSHEETS (COMPARISON MATRIX) -->
+            <section class="w-full py-space-2xl bg-surface">
+                <div class="max-w-[1000px] mx-auto px-margin">
+                    <div class="text-center max-w-xl mx-auto mb-space-xl">
+                        <h2 class="font-display-hero text-display-hero text-on-surface font-extrabold">
+                            Why Modern Earners Ditch Spreadsheets for Fintrack
+                        </h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+                            Spreadsheets are great for accounting history. Fintrack is built for real-time everyday
+                            behavioral decision making.
+                        </p>
+                    </div>
+                    <div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden">
+                        <!-- Table Header -->
+                        <div
+                            class="grid grid-cols-12 bg-secondary p-space-md text-surface-container-lowest items-center">
+                            <div class="col-span-5 font-tab-label text-tab-label">Core Capability</div>
+                            <div
+                                class="col-span-3 text-center font-caption text-caption text-surface-container-lowest/70 uppercase">
+                                Manual Sheets</div>
+                            <div
+                                class="col-span-4 text-center font-tab-label text-tab-label text-primary-container bg-surface-container-lowest py-space-2xs rounded-lg shadow-sm">
+                                Fintrack Mobile App</div>
+                        </div>
+                        <!-- Row 1 -->
+                        <div
+                            class="grid grid-cols-12 p-space-md items-center border-b-0 hover:bg-surface-container-low transition-colors">
+                            <div class="col-span-5">
+                                <div class="font-tab-label text-tab-label text-on-surface">Live Bank Reconciliation
+                                </div>
+                                <div class="font-caption text-caption text-on-surface-variant">Automatic imports via
+                                    verified API</div>
+                            </div>
+                            <div class="col-span-3 text-center text-on-surface-variant">
+                                <span class="material-symbols-outlined text-error text-[20px]">close</span>
+                                <div class="font-caption text-[11px]">Manual typing</div>
+                            </div>
+                            <div
+                                class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                <span class="font-tab-label text-tab-label">Instant &amp; Automated</span>
+                            </div>
+                        </div>
+                        <!-- Row 2 -->
+                        <div
+                            class="grid grid-cols-12 p-space-md items-center bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+                            <div class="col-span-5">
+                                <div class="font-tab-label text-tab-label text-on-surface">Daily Spend Velocity</div>
+                                <div class="font-caption text-caption text-on-surface-variant">Live recalculation of
+                                    safe daily burn</div>
+                            </div>
+                            <div class="col-span-3 text-center text-on-surface-variant">
+                                <span class="material-symbols-outlined text-error text-[20px]">close</span>
+                                <div class="font-caption text-[11px]">Static month totals</div>
+                            </div>
+                            <div
+                                class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                <span class="font-tab-label text-tab-label">Calculated Real-time</span>
+                            </div>
+                        </div>
+                        <!-- Row 3 -->
+                        <div
+                            class="grid grid-cols-12 p-space-md items-center hover:bg-surface-container-low transition-colors">
+                            <div class="col-span-5">
+                                <div class="font-tab-label text-tab-label text-on-surface">Receipt OCR &amp;
+                                    Auto-Categorization</div>
+                                <div class="font-caption text-caption text-on-surface-variant">AI parser for paper and
+                                    electronic receipts</div>
+                            </div>
+                            <div class="col-span-3 text-center text-on-surface-variant">
+                                <span class="material-symbols-outlined text-error text-[20px]">close</span>
+                                <div class="font-caption text-[11px]">Manual row insertion</div>
+                            </div>
+                            <div
+                                class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                <span class="font-tab-label text-tab-label">3 Seconds Photo-to-Log</span>
+                            </div>
+                        </div>
+                        <!-- Row 4 -->
+                        <div
+                            class="grid grid-cols-12 p-space-md items-center bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+                            <div class="col-span-5">
+                                <div class="font-tab-label text-tab-label text-on-surface">Proactive Push Interventions
+                                </div>
+                                <div class="font-caption text-caption text-on-surface-variant">Warns you before
+                                    overspending happens</div>
+                            </div>
+                            <div class="col-span-3 text-center text-on-surface-variant">
+                                <span class="material-symbols-outlined text-error text-[20px]">close</span>
+                                <div class="font-caption text-[11px]">Silent &amp; passive</div>
+                            </div>
+                            <div
+                                class="col-span-4 text-center font-bold text-income-green flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                <span class="font-tab-label text-tab-label">Smart Gentle Alerts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- SOCIAL PROOF: REAL REVIEWS FROM PROACTIVE FINTRACKERS -->
 
-        closeDemo.addEventListener('click', () => {
-          demoModal.classList.add('hidden');
-          demoModal.classList.remove('flex');
-        });
+            <!-- SECURITY & PRIVACY SECTION (BANK-GRADE ASSURANCE) -->
+            <section class="w-full py-space-2xl bg-surface" id="security">
+                <div class="max-w-[1200px] mx-auto px-margin">
+                    <div
+                        class="bg-secondary text-surface-container-lowest rounded-2xl p-space-xl sm:p-space-2xl shadow-lg relative overflow-hidden">
+                        <!-- Background Shield Accent -->
+                        <div
+                            class="absolute -right-16 -bottom-16 w-80 h-80 text-surface-container-lowest/5 pointer-events-none">
+                            <span class="material-symbols-outlined text-[280px]">shield</span>
+                        </div>
+                        <div class="max-w-2xl">
+                            <div
+                                class="inline-flex items-center gap-space-xs bg-surface-container-lowest/15 px-space-md py-space-xs rounded-full mb-space-md">
+                                <span
+                                    class="material-symbols-outlined text-[18px] text-income-green">verified_user</span>
+                                <span
+                                    class="font-caption text-caption text-surface-container-lowest uppercase tracking-wider font-bold">BI-SNAP
+                                    Protocol Certified</span>
+                            </div>
+                            <h2
+                                class="font-display-hero text-display-hero text-surface-container-lowest font-extrabold mb-space-md">
+                                Your Money Is Sacred. Your Data Remains Yours Alone.
+                            </h2>
+                            <p class="font-body-md text-body-md text-surface-container-lowest/80 mb-space-xl">
+                                We use end-to-end 256-bit AES cryptographic channels and read-only tokenization.
+                                Fintrack can never initiate transactions or move money on your behalf—only you hold the
+                                keys.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+                                <div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
+                                    <span
+                                        class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">lock</span>
+                                    <div class="font-tab-label text-tab-label">Read-Only Access</div>
+                                    <p class="font-caption text-caption text-surface-container-lowest/70 mt-1">Zero
+                                        ability to transfer or withdraw funds.</p>
+                                </div>
+                                <div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
+                                    <span
+                                        class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">no_accounts</span>
+                                    <div class="font-tab-label text-tab-label">Zero Data Selling</div>
+                                    <p class="font-caption text-caption text-surface-container-lowest/70 mt-1">We make
+                                        money through Pro tools, not advertising.</p>
+                                </div>
+                                <div class="bg-surface-container-lowest/10 p-space-md rounded-xl">
+                                    <span
+                                        class="material-symbols-outlined text-primary-container text-[24px] mb-space-xs">key</span>
+                                    <div class="font-tab-label text-tab-label">Hardware Enclave</div>
+                                    <p class="font-caption text-caption text-surface-container-lowest/70 mt-1">Local
+                                        biometric FaceID / TouchID protection.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- BOTTOM CONVERSION CTA HERO BANNER -->
+            <section class="w-full py-space-2xl bg-surface-container-low">
+                <div class="max-w-[1200px] mx-auto px-margin">
+                    <div
+                        class="bg-surface-container-lowest rounded-2xl p-space-xl sm:p-space-2xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-space-xl">
+                        <div class="max-w-xl">
+                            <span
+                                class="font-caption text-caption text-primary-container font-extrabold uppercase tracking-wider">Start
+                                Today Free</span>
+                            <h2
+                                class="font-display-hero text-display-hero text-on-surface font-extrabold mt-space-xs mb-space-md">
+                                Take Control of Your Financial Freedom in 3 Minutes.
+                            </h2>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+                                Download Fintrack today. Connect your primary account, discover your daily spending
+                                target, and see how simple wealth building truly feels.
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center gap-space-md">
+                                <!-- App Store Button -->
+                                <a class="w-full sm:w-auto h-[52px] px-space-lg rounded-xl bg-secondary text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-on-secondary-fixed transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-[22px]">phone_iphone</span>
+                                    <span>App Store</span>
+                                </a>
+                                <!-- Google Play Button -->
+                                <a class="w-full sm:w-auto h-[52px] px-space-lg rounded-xl bg-secondary text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-on-secondary-fixed transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-[22px]">android</span>
+                                    <span>Google Play</span>
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-space-sm mt-space-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-income-green text-[18px]">verified</span>
+                                <span class="font-caption text-caption font-bold">30-day money-back guarantee on Pro
+                                    features • No credit card required to start</span>
+                            </div>
+                        </div>
+                        <!-- QR Code Card for Instant Mobile Scan -->
+                        <div
+                            class="flex flex-col items-center bg-surface-container-low p-space-lg rounded-xl shadow-sm text-center min-w-[240px]">
+                            <!-- Stylized QR Code SVG -->
+                            <div
+                                class="w-36 h-36 bg-surface-container-lowest p-2 rounded-lg shadow-sm flex items-center justify-center mb-space-sm">
+                                <svg class="w-full h-full text-secondary" fill="currentColor" viewBox="0 0 100 100">
+                                    <rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4"
+                                        width="24" x="10" y="10"></rect>
+                                    <rect height="12" width="12" x="16" y="16"></rect>
+                                    <rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4"
+                                        width="24" x="66" y="10"></rect>
+                                    <rect height="12" width="12" x="72" y="16"></rect>
+                                    <rect fill="none" height="24" rx="2" stroke="currentColor" stroke-width="4"
+                                        width="24" x="10" y="66"></rect>
+                                    <rect height="12" width="12" x="16" y="72"></rect>
+                                    <!-- Data squares -->
+                                    <rect height="6" width="6" x="42" y="12"></rect>
+                                    <rect height="6" width="6" x="52" y="18"></rect>
+                                    <rect height="6" width="6" x="42" y="28"></rect>
+                                    <rect height="6" width="6" x="52" y="38"></rect>
+                                    <rect height="6" width="6" x="12" y="44"></rect>
+                                    <rect height="6" width="6" x="22" y="52"></rect>
+                                    <rect height="12" rx="1" width="12" x="44" y="52"></rect>
+                                    <rect height="6" width="6" x="66" y="44"></rect>
+                                    <rect height="6" width="6" x="78" y="52"></rect>
+                                    <rect height="6" width="6" x="66" y="66"></rect>
+                                    <rect height="8" width="8" x="80" y="76"></rect>
+                                    <rect height="6" width="6" x="44" y="76"></rect>
+                                    <rect height="6" width="6" x="54" y="84"></rect>
+                                </svg>
+                            </div>
+                            <span class="font-tab-label text-tab-label text-on-surface">Scan with Camera</span>
+                            <span class="font-caption text-caption text-on-surface-variant">Instant app download
+                                link</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- INTERACTIVE LIVE DEMO MODAL (Micro-interaction) -->
+            <div class="fixed inset-0 z-50 bg-on-surface/60 backdrop-blur-sm items-center justify-center p-margin hidden"
+                id="demoModal">
+                <div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl shadow-2xl p-space-xl relative">
+                    <div class="flex items-center justify-between mb-space-md">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-primary-container text-[24px]">calculate</span>
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface">Instant Spend Velocity Sim
+                            </h3>
+                        </div>
+                        <button
+                            class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-on-surface"
+                            id="closeDemo">
+                            <span class="material-symbols-outlined text-[18px]">close</span>
+                        </button>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                        Enter your remaining budget and remaining days in the month to see Fintrack's instant safe daily
+                        allocation:
+                    </p>
+                    <div class="space-y-space-md mb-space-lg">
+                        <div>
+                            <label class="font-input-label text-input-label text-on-surface block mb-1">Remaining
+                                Monthly Budget (IDR)</label>
+                            <div class="h-[52px] bg-surface-container-low rounded-xl px-space-md flex items-center">
+                                <span class="text-on-surface-variant mr-2">Rp</span>
+                                <input
+                                    class="w-full bg-transparent font-currency-md text-currency-md text-on-surface focus:outline-none"
+                                    id="demoAmount" type="number" value="3000000">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="font-input-label text-input-label text-on-surface block mb-1">Days Remaining
+                                In Cycle</label>
+                            <div class="h-[52px] bg-surface-container-low rounded-xl px-space-md flex items-center">
+                                <input
+                                    class="w-full bg-transparent font-currency-md text-currency-md text-on-surface focus:outline-none"
+                                    id="demoDays" type="number" value="15">
+                                <span class="text-on-surface-variant font-tab-label">Days</span>
+                            </div>
+                        </div>
+                        <!-- Live Result Banner -->
+                        <div class="bg-primary-container/10 p-space-md rounded-xl flex items-center justify-between">
+                            <div>
+                                <div class="font-caption text-caption text-on-surface-variant font-bold">YOUR SAFE DAILY
+                                    TARGET</div>
+                                <div class="font-currency-lg text-currency-lg text-primary-container" id="demoResult">Rp
+                                    200.000 / day</div>
+                            </div>
+                            <span class="material-symbols-outlined text-income-green text-[32px]">task_alt</span>
+                        </div>
+                    </div>
+                    <a class="w-full h-[52px] rounded-xl bg-primary-container text-surface-container-lowest font-button-lg text-button-lg flex items-center justify-center gap-space-sm hover:bg-primary transition-all"
+                        href="#">
+                        Claim Free Account &amp; Lock Budget
+                    </a>
+                </div>
+            </div>
+            <!-- Vanilla Interaction Script for Calculator & Modal -->
+            <script>
+                (function () {
+                    const demoTrigger = document.getElementById('demoTrigger');
+                    const demoModal = document.getElementById('demoModal');
+                    const closeDemo = document.getElementById('closeDemo');
+                    const demoAmount = document.getElementById('demoAmount');
+                    const demoDays = document.getElementById('demoDays');
+                    const demoResult = document.getElementById('demoResult');
 
-        demoModal.addEventListener('click', (e) => {
-          if (e.target === demoModal) {
-            demoModal.classList.add('hidden');
-            demoModal.classList.remove('flex');
-          }
-        });
-      }
+                    if (demoTrigger && demoModal && closeDemo) {
+                        demoTrigger.addEventListener('click', () => {
+                            demoModal.classList.remove('hidden');
+                            demoModal.classList.add('flex');
+                        });
 
-      function updateVelocity() {
-        if (!demoAmount || !demoDays || !demoResult) return;
-        const amount = parseFloat(demoAmount.value) || 0;
-        const days = parseFloat(demoDays.value) || 1;
-        const velocity = Math.max(0, Math.floor(amount / (days > 0 ? days : 1)));
-        demoResult.textContent = 'Rp ' + velocity.toLocaleString('id-ID') + ' / day';
-      }
+                        closeDemo.addEventListener('click', () => {
+                            demoModal.classList.add('hidden');
+                            demoModal.classList.remove('flex');
+                        });
 
-      if (demoAmount && demoDays) {
-        demoAmount.addEventListener('input', updateVelocity);
-        demoDays.addEventListener('input', updateVelocity);
-      }
-    })();
-  </script>
-</div></main><footer class="w-full bg-surface-container-low"><div class="max-w-[1200px] mx-auto px-margin py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl mb-space-2xl"><div class="lg:col-span-2 flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-surface-container-lowest text-[22px]">account_balance_wallet</span></div><span class="font-headline-sm text-headline-sm font-extrabold text-on-surface">Fintrack</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Intelligent cash flow mastery, automated categorization, and real-time financial trajectory for proactive wealth builders.</p><div class="flex items-center gap-space-sm mt-space-sm"><div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-sm rounded-lg"><span class="material-symbols-outlined text-secondary text-[20px]">verified_user</span><span class="font-caption text-caption text-on-surface font-bold">SOC-2 Certified</span></div><div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-sm rounded-lg"><span class="material-symbols-outlined text-secondary text-[20px]">lock</span><span class="font-caption text-caption text-on-surface font-bold">256-bit AES</span></div></div></div><div><div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">Product</div><ul class="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="features" href="#">Smart Analytics</a></li><li><a class="hover:text-on-surface transition-colors" data-path="how-it-works" href="#">Automated Budgets</a></li><li><a class="hover:text-on-surface transition-colors" data-path="features" href="#">Multi-Wallet Sync</a></li><li><a class="hover:text-on-surface transition-colors" data-path="pricing" href="#">Premium Plans</a></li></ul></div><div><div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">Trust &amp; Legal</div><ul class="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant"><li><a class="hover:text-on-surface transition-colors" data-path="security" href="#">Security Whitepaper</a></li><li><a class="hover:text-on-surface transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a></li><li><a class="hover:text-on-surface transition-colors" data-path="terms-of-service" href="#">Terms of Service</a></li><li><a class="hover:text-on-surface transition-colors" data-path="compliance" href="#">Bank Link Protocols</a></li></ul></div><div><div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">Install App</div><p class="font-caption text-caption text-on-surface-variant mb-space-sm">Available on iOS &amp; Android</p><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface text-[24px]">phone_iphone</span><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant text-[10px] leading-3">Download on</span><span class="font-tab-label text-tab-label text-on-surface">Apple App Store</span></div></div><div class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface text-[24px]">android</span><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant text-[10px] leading-3">Get it on</span><span class="font-tab-label text-tab-label text-on-surface">Google Play Store</span></div></div></div></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md"><span class="font-caption text-caption text-on-surface-variant">© 2025 Fintrack Technologies, Inc. All rights reserved.</span><div class="flex items-center gap-space-md text-on-surface-variant"><span class="font-caption text-caption">Regulated financial connection partner via Plaid</span></div></div></div></footer>
+                        demoModal.addEventListener('click', (e) => {
+                            if (e.target === demoModal) {
+                                demoModal.classList.add('hidden');
+                                demoModal.classList.remove('flex');
+                            }
+                        });
+                    }
 
-</body></html>
+                    function updateVelocity() {
+                        if (!demoAmount || !demoDays || !demoResult) return;
+                        const amount = parseFloat(demoAmount.value) || 0;
+                        const days = parseFloat(demoDays.value) || 1;
+                        const velocity = Math.max(0, Math.floor(amount / (days > 0 ? days : 1)));
+                        demoResult.textContent = 'Rp ' + velocity.toLocaleString('id-ID') + ' / day';
+                    }
+
+                    if (demoAmount && demoDays) {
+                        demoAmount.addEventListener('input', updateVelocity);
+                        demoDays.addEventListener('input', updateVelocity);
+                    }
+                })();
+            </script>
+        </div>
+    </main>
+    <footer class="w-full bg-surface-container-low">
+        <div class="max-w-[1200px] mx-auto px-margin py-space-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl mb-space-2xl">
+                <div class="lg:col-span-2 flex flex-col gap-space-md">
+                    <div class="flex items-center gap-space-sm">
+                        <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center"><span
+                                class="material-symbols-outlined text-surface-container-lowest text-[22px]">account_balance_wallet</span>
+                        </div><span
+                            class="font-headline-sm text-headline-sm font-extrabold text-on-surface">Fintrack</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Intelligent cash flow mastery,
+                        automated categorization, and real-time financial trajectory for proactive wealth builders.</p>
+                </div>
+                <div>
+                    <div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">
+                        Product</div>
+                    <ul class="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant">
+                        <li><a class="hover:text-on-surface transition-colors" data-path="features" href="#">Smart
+                                Analytics</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="how-it-works"
+                                href="#">Automated Budgets</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="features"
+                                href="#">Multi-Wallet Sync</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="pricing" href="#">Premium
+                                Plans</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">
+                        Trust &amp; Legal</div>
+                    <ul class="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant">
+                        <li><a class="hover:text-on-surface transition-colors" data-path="security" href="#">Security
+                                Whitepaper</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="privacy-policy"
+                                href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="terms-of-service"
+                                href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-on-surface transition-colors" data-path="compliance" href="#">Bank Link
+                                Protocols</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-chip-label text-chip-label text-on-surface mb-space-md uppercase tracking-wider">
+                        Install App</div>
+                    <p class="font-caption text-caption text-on-surface-variant mb-space-sm">Available on iOS &amp;
+                        Android</p>
+                    <div class="flex flex-col gap-space-sm">
+                        <div
+                            class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-colors">
+                            <span class="material-symbols-outlined text-on-surface text-[24px]">phone_iphone</span>
+                            <div class="flex flex-col"><span
+                                    class="font-caption text-caption text-on-surface-variant text-[10px] leading-3">Download
+                                    on</span><span class="font-tab-label text-tab-label text-on-surface">Apple App
+                                    Store</span></div>
+                        </div>
+                        <div
+                            class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-lowest cursor-pointer hover:bg-surface-container transition-colors">
+                            <span class="material-symbols-outlined text-on-surface text-[24px]">android</span>
+                            <div class="flex flex-col"><span
+                                    class="font-caption text-caption text-on-surface-variant text-[10px] leading-3">Get
+                                    it on</span><span class="font-tab-label text-tab-label text-on-surface">Google Play
+                                    Store</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md"><span
+                    class="font-caption text-caption text-on-surface-variant">© 2026. Sendiko Software Studio. All
+                    rights reserved.</span>
+                <div class="flex items-center gap-space-md text-on-surface-variant"></div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
