@@ -1,92 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance Tracker API Documentation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: "Inter", sans-serif;
-            background-color: #f3f4f6;
-            color: #333;
-        }
-        .container {
-            max-width: 960px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
-        }
-        h1 {
-            color: #1f2937; /* text-gray-900 */
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        h2 {
-            color: #1f2937;
-            font-size: 1.75rem; /* text-3xl */
-            font-weight: 600; /* semibold */
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #e5e7eb; /* border-b-2 border-gray-200 */
-            padding-bottom: 0.5rem;
-        }
-        h3 {
-            color: #374151; /* text-gray-800 */
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .endpoint-section {
-            background-color: #f9fafb; /* bg-gray-50 */
-            padding: 1rem;
-            border-radius: 0.5rem; /* rounded-lg */
-            margin-bottom: 1.5rem;
-            border: 1px solid #e5e7eb; /* border border-gray-200 */
-        }
-        .endpoint-section p {
-            margin-bottom: 0.5rem;
-        }
-        .code-block {
-            background-color: #1f2937; /* bg-gray-900 */
-            color: #f9fafb; /* text-gray-50 */
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            margin-top: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-        }
-        .method-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem; /* rounded-md */
-            font-weight: bold;
-            color: white;
-            margin-right: 0.5rem;
-        }
-        .method-post { background-color: #22c55e; /* bg-green-500 */ }
-        .method-get { background-color: #0ea5e9; /* bg-sky-500 */ }
-        .method-put { background-color: #f97316; /* bg-orange-500 */ }
-        .method-delete { background-color: #ef4444; /* bg-red-500 */ }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Finance Tracker API Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--surface:#fffbff;--surface-pure:#fff;--ink:#1a1a1a;--muted:#58423a;--slate:#273f4f;--coral:#fe7743;--coral-dark:#a83905;--income:#4db441;--expense:#830100;--border:#d9d9d9}*{box-sizing:border-box}body{margin:0;min-width:320px;font-family:"Plus Jakarta Sans",sans-serif;background:var(--surface);color:var(--ink);line-height:1.6}.container{max-width:1120px;margin:0 auto;padding:3.5rem 2rem 5rem}h1{max-width:760px;margin:0 0 1rem;color:var(--slate);font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.2;letter-spacing:-.04em}h2{display:flex;align-items:center;gap:.75rem;margin:3rem 0 1rem;padding:0 0 .75rem;border-bottom:2px solid var(--border);color:var(--slate);font-size:1.5rem;font-weight:800;letter-spacing:-.02em}h3{margin:0 0 1rem;color:var(--slate);font-size:1.1rem;font-weight:800;line-height:1.45;overflow-wrap:anywhere}.endpoint-section{margin-bottom:1rem;padding:1.5rem;border:1px solid var(--border);border-radius:16px;background:var(--surface-pure);box-shadow:0 8px 24px rgba(39,63,79,.06)}.endpoint-section p{margin:.55rem 0;color:var(--muted);font-size:.9rem}.endpoint-section strong{color:var(--ink);font-weight:700}code{padding:.15rem .4rem;border-radius:4px;background:#f0edf1;color:var(--coral-dark);font-family:monospace;font-size:.88em}.code-block{margin:1rem 0;padding:1rem 1.15rem;overflow-x:auto;border-radius:12px;background:var(--slate);color:#fffbff;font-family:monospace;font-size:.84rem;line-height:1.7;tab-size:2;white-space:pre-wrap;overflow-wrap:anywhere}.hero{margin-bottom:2rem;padding:2rem;border-radius:16px;background:var(--slate);color:#fffbff;box-shadow:0 16px 32px rgba(39,63,79,.14)}.hero h1{color:#fffbff}.hero p{max-width:680px;margin:0;color:#dce8ed}.eyebrow{margin:0 0 .75rem;color:var(--coral);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.base-url{display:inline-block;margin-top:1.25rem;padding:.65rem .9rem;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fffbff;font-family:monospace;font-size:.85rem;overflow-wrap:anywhere}.method-tag{display:inline-block;min-width:4.5rem;margin-right:.6rem;padding:.3rem .65rem;border-radius:4px;color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-align:center;vertical-align:.08rem}.method-post{background:var(--income)}.method-get{background:var(--slate)}.method-put{background:var(--coral)}.method-delete{background:var(--expense)}@media(max-width:640px){.container{padding:1.5rem 1rem 3rem}.hero{padding:1.5rem}.endpoint-section{padding:1.15rem}h2{margin-top:2.25rem;font-size:1.3rem}.method-tag{min-width:4rem}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-4xl">Personal Finance Tracker API Documentation</h1>
-
-        <p class="text-gray-600 mb-6 text-center">
-            This document outlines the API endpoints for the Personal Finance Tracker.
-            <br>
-            <strong>Base URL:</strong> <code class="bg-gray-100 p-1 rounded"> https://fintrack.sendiko.my.id</code>
-        </p>
-
-        <hr class="my-8 border-gray-300">
+    <main class="container">
+        <header class="hero">
+            <p class="eyebrow">Fintrack developer reference</p>
+            <h1>Personal Finance Tracker API Documentation</h1>
+            <p>Build secure, connected financial experiences with the Fintrack REST API. Browse authentication, wallets, transactions, transfers, and budget endpoints below.</p>
+            <div class="base-url"><strong>Base URL</strong> &nbsp;https://fintrack.sendiko.my.id</div>
+        </header>
 
         <h2>1. User Endpoints</h2>
 
@@ -281,13 +213,13 @@
             <h3><span class="method-tag method-get">GET</span> /budgets</h3>
             <p><strong>Description:</strong> Retrieves all budgets for the authenticated user with current spending summaries.</p>
             <p><strong>Summary fields:</strong> <code>totalAmount</code>, <code>spent</code>, <code>remainingAmount</code>, <code>remainingDays</code>, <code>todayBudget</code>, <code>spentToday</code>, <code>remainingToday</code>, <code>dailyPercentageUsed</code>, <code>totalPercentageUsed</code>, and <code>isActive</code>. Percentage fields are rounded integers from <code>0</code> to <code>100</code>.</p>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 
         <div class="endpoint-section">
             <h3><span class="method-tag method-get">GET</span> /budgets/{budgetId}</h3>
             <p><strong>Description:</strong> Retrieves one budget and its current spending summary.</p>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 
         <div class="endpoint-section">
@@ -312,7 +244,7 @@
                     }
                 }
             </pre>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 
         <div class="endpoint-section">
@@ -327,7 +259,7 @@
                 }
             </pre>
             <p><strong>Validation:</strong> <code>amount</code> must be greater than zero, dates must be valid, and <code>startDate</code> cannot be after <code>endDate</code>.</p>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 
         <div class="endpoint-section">
@@ -339,14 +271,63 @@
                     "endDate": "2026-12-05"
                 }
             </pre>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
 
         <div class="endpoint-section">
             <h3><span class="method-tag method-delete">DELETE</span> /budgets/{budgetId}</h3>
             <p><strong>Description:</strong> Deletes a budget.</p>
-            <p><strong>Authentication:</strong> ******</p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
         </div>
-    </div>
+
+        <h2>7. Spending Analysis</h2>
+
+        <p class="section-intro">
+            Returns expense spending grouped by category, category budget percentages, and a rolling
+            six-month history with the month-over-month change percentage. Transfers are excluded.
+        </p>
+
+        <div class="endpoint-section">
+            <h3><span class="method-tag method-get">GET</span> /analysis/spending</h3>
+            <p><strong>Description:</strong> Retrieves the authenticated user's spending analysis.</p>
+            <p><strong>Query parameters:</strong> <code>range</code> accepts <code>month</code> (default), <code>week</code>, or <code>custom</code>. For <code>custom</code>, provide both <code>startDate</code> and <code>endDate</code> in <code>YYYY-MM-DD</code> format.</p>
+            <p><strong>Examples:</strong> <code>/analysis/spending?range=week</code> or <code>/analysis/spending?range=custom&amp;startDate=2026-11-01&amp;endDate=2026-11-15</code></p>
+            <p><strong>Authentication:</strong> Bearer Token</p>
+            <p><strong>Success response (200):</strong></p>
+            <pre class="code-block">{
+    "status": 200,
+    "message": "Spending analysis fetched successfully.",
+    "data": {
+        "totalSpending": 1425000,
+        "range": {
+            "type": "month",
+            "startDate": "2026-11-01T00:00:00.000Z",
+            "endDate": "2026-11-30T23:59:59.999Z"
+        },
+        "categories": [
+            {
+                "id": "70b92638-f06a-4d1a-b5f7-56ae7de4dc18",
+                "name": "Food & Beverage",
+                "color": "#10B981",
+                "icon": "restaurant",
+                "amount": 950000,
+                "budget": 2000000,
+                "percentageOfTotal": 66.7,
+                "percentageOfBudget": 47.5
+            }
+        ],
+        "history": {
+            "momChangePercentage": -12.4,
+            "months": [
+                { "month": "JUN", "amount": 2100000 },
+                { "month": "JUL", "amount": 1950000 },
+                { "month": "AUG", "amount": 1626000 },
+                { "month": "SEP", "amount": 1425000 }
+            ]
+        }
+    }
+}</pre>
+        </div>
+    </main>
 </body>
 </html>
