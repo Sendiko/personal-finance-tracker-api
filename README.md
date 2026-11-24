@@ -54,6 +54,8 @@ bun run build
 Configure `CORS_ORIGIN`, `DB_NAME`, `DB_USER`, `DB_PASS`, and `DB_HOST` in `.env`, then use:
 
 For local frontend development, set `CORS_ORIGIN=http://localhost:3000`.
+For multiple environments, provide comma-separated origins, for example:
+`CORS_ORIGIN=http://localhost:3000,https://fintrack.sendiko.dev`.
 
 | Command | Purpose |
 | --- | --- |
