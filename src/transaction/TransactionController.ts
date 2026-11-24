@@ -21,7 +21,7 @@ const TransactionController = {
 
       const startDate = req.query.startDate as string | undefined;
       const endDate = req.query.endDate as string | undefined;
-      const dateFilter: { [Op.gte]?: Date; [Op.lte]?: Date } = {};
+      const dateFilter: { [Op.gte]?: Date;[Op.lte]?: Date } = {};
 
       if (startDate) {
         const startDateObj = new Date(startDate);
@@ -58,7 +58,7 @@ const TransactionController = {
 
       const requestedTypes = req.query.type
         ? (Array.isArray(req.query.type) ? req.query.type : [req.query.type])
-            .flatMap((value) => String(value).split(","))
+          .flatMap((value) => String(value).split(","))
         : [];
       const allowedTypes = ["income", "expense"];
       const invalidType = requestedTypes.find((type) => !allowedTypes.includes(type));
@@ -87,6 +87,7 @@ const TransactionController = {
       const transactions = await Transaction.findAll({
         where,
         include: [Wallet, Category],
+        order: [['createdAt', 'DESC']]
       });
 
       return res.status(200).json({
