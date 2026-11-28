@@ -5,6 +5,23 @@ import Wallet from "../wallet/Wallet";
 import Category from "../category/Category";
 import User from "../user/User";
 
+const parseTransactionDate = (rawDate: unknown): { date?: Date; error?: string } => {
+  if (rawDate === undefined || rawDate === null || rawDate === "") {
+    return {};
+  }
+
+  if (typeof rawDate !== "string" && typeof rawDate !== "number" && !(rawDate instanceof Date)) {
+    return { error: "Invalid date. Use a valid date." };
+  }
+
+  const parsedDate = new Date(rawDate);
+  if (Number.isNaN(parsedDate.getTime())) {
+    return { error: "Invalid date. Use a valid date." };
+  }
+
+  return { date: parsedDate };
+};
+
 const TransactionController = {
   index: async (req: Request, res: Response) => {
     try {
@@ -138,9 +155,19 @@ const TransactionController = {
   },
   store: async (req: Request, res: Response) => {
     try {
-      const transactionData = req.body.date
-        ? { ...req.body, createdAt: req.body.date }
-        : req.body;
+      const { date, ...rest } = req.body;
+      const { date: parsedDate, error: dateError } = parseTransactionDate(date);
+
+      if (dateError) {
+        return res.status(400).json({
+          status: 400,
+          message: dateError,
+        });
+      }
+
+      const transactionData = parsedDate
+        ? { ...rest, createdAt: parsedDate }
+        : rest;
       const transaction = await Transaction.create(transactionData);
 
       // @ts-ignore: transaction has type
@@ -202,7 +229,22 @@ const TransactionController = {
         });
       }
 
-      await transaction.update(req.body);
+      const { date, ...rest } = req.body;
+      const { date: parsedDate, error: dateError } = parseTransactionDate(date);
+
+      if (dateError) {
+        return res.status(400).json({
+          status: 400,
+          message: dateError,
+        });
+      }
+
+      transaction.set(rest);
+      if (parsedDate) {
+        transaction.setDataValue("createdAt", parsedDate);
+        transaction.changed("createdAt" as any, true);
+      }
+      await transaction.save();
 
       // @ts-ignore: transaction has type
       if (transaction.type === "expense") {
